@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)https://habr.com/ru/company/ruvds/blog/500290/ -->
+<html lang="ru"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+  <title>Выделение и CSS / Хабр</title>
+  <style>
+    /* cyrillic-ext */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveSxf6TF0.woff2) format('woff2');
+      unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+    }
+
+    /* cyrillic */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveQhf6TF0.woff2) format('woff2');
+      unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+    }
+
+    /* latin-ext */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveSBf6TF0.woff2) format('woff2');
+      unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+    }
+
+    /* latin */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveRhf6.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+  </style>
+  <link rel="preload" href="./Выделение и CSS _ Хабр_files/chunk-vendors.961b6771.css" as="style"><link rel="preload" href="./Выделение и CSS _ Хабр_files/chunk-vendors.3520ba24.js.Без названия" as="script"><link rel="preload" href="./Выделение и CSS _ Хабр_files/app.8769ce4b.css" as="style"><link rel="preload" href="./Выделение и CSS _ Хабр_files/app.dfde8f63.js.Без названия" as="script">
+  <link rel="stylesheet" href="./Выделение и CSS _ Хабр_files/chunk-vendors.961b6771.css"><link rel="stylesheet" href="./Выделение и CSS _ Хабр_files/app.8769ce4b.css">
+  <script type="text/javascript" async="" src="./Выделение и CSS _ Хабр_files/js"></script><script async="" src="./Выделение и CSS _ Хабр_files/tag.js.Без названия"></script><script async="" src="./Выделение и CSS _ Хабр_files/analytics.js.Без названия"></script><script>window.i18nFetch = new Promise((res, rej) => {
+          const xhr = new XMLHttpRequest();
+          xhr.open('GET', '/js/i18n/ru-compiled.3b03adbf5ac46fc5ac3df8724bf36cc4.json');
+          xhr.responseType = 'json';
+          xhr.onload = function(e) {
+            if (this.status === 200) {
+              res({ru: xhr.response});
+            } else {
+              rej(e);
+            }
+          };
+          xhr.send();
+        });</script>
+  
+  <script data-vue-meta="ssr" type="application/ld+json" data-vmid="ldjson-schema">{"@context":"http:\/\/schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/habr.com\/ru\/company\/ruvds\/blog\/500290\/"},"headline":"Выделение и CSS","datePublished":"2020-05-04T13:45:01+03:00","dateModified":"2020-05-04T13:45:01+03:00","author":{"@type":"Person","name":"ru_vds"},"publisher":{"@type":"Organization","name":"Habr","logo":{"@type":"ImageObject","url":"https:\/\/habrastorage.org\/webt\/a_\/lk\/9m\/a_lk9mjkccjox-zccjrpfolmkmq.png"}},"description":"Навык выделения текста и других объектов сформировался у пользователей компьютеров много лет назад. Мы выделяем содержимое веб-страниц по разным причинам. Возмож...","url":"https:\/\/habr.com\/ru\/company\/ruvds\/blog\/500290\/#post-content-body","about":["c_ruvds","h_webdev","h_css","f_develop"],"image":["https:\/\/habrastorage.org\/webt\/qm\/wt\/vg\/qmwtvgphijaluf7aun0uch7jm6o.jpeg","https:\/\/habrastorage.org\/getpro\/habr\/post_images\/da6\/292\/4da\/da62924da5b208a48216f15626d9537e.png","https:\/\/habrastorage.org\/getpro\/habr\/post_images\/429\/2b1\/7e1\/4292b17e11cd0a635acedfd26e7180a5.jpg","https:\/\/habrastorage.org\/getpro\/habr\/post_images\/a7c\/089\/ab5\/a7c089ab5677db1f5c0ef17745f09238.jpg","https:\/\/habrastorage.org\/getpro\/habr\/post_images\/cea\/a97\/829\/ceaa978295473fe6c033ffb06dceff44.png","https:\/\/habrastorage.org\/getpro\/habr\/post_images\/601\/3c8\/8a8\/6013c88a84f4780258a61aa52fb69799.png","https:\/\/habrastorage.org\/getpro\/habr\/post_images\/a92\/dce\/85a\/a92dce85a3e3829239301a964b55eb89.png","https:\/\/habrastorage.org\/getpro\/habr\/post_images\/773\/92c\/0d0\/77392c0d0445d137339b65f9d685d720.png","https:\/\/habrastorage.org\/getpro\/habr\/post_images\/b81\/c0d\/118\/b81c0d1187271d603e49991abe36154f.png","https:\/\/habrastorage.org\/getpro\/habr\/post_images\/989\/360\/2ce\/9893602ce0a18557a0a3f3871bec04ff.png","https:\/\/habrastorage.org\/getpro\/habr\/post_images\/3a8\/52c\/ca7\/3a852cca7a57ec4fae1780b6fe4a119a.png","https:\/\/habrastorage.org\/getpro\/habr\/post_images\/efc\/f04\/cbf\/efcf04cbfa7376728a35494117953c5b.png","https:\/\/habrastorage.org\/getpro\/habr\/post_images\/c26\/79c\/7f1\/c2679c7f19fb705301f09710333a61db.jpg","https:\/\/habrastorage.org\/getpro\/habr\/post_images\/5c4\/72e\/d6e\/5c472ed6e4851aea24d08fd706215c0c.jpg","https:\/\/habrastorage.org\/getpro\/habr\/post_images\/d58\/f6a\/715\/d58f6a7159c291426170273b3fc27158.jpg","https:\/\/habrastorage.org\/getpro\/habr\/post_images\/e45\/cf4\/550\/e45cf4550417685e7c2d0f7d8886b2be.png","https:\/\/habrastorage.org\/getpro\/habr\/post_images\/b27\/268\/bf1\/b27268bf14cf0449e39f84b03ca94d14.png","https:\/\/habrastorage.org\/getpro\/habr\/post_images\/123\/dc3\/706\/123dc3706fedd988cd7409a2784dbad9.png","https:\/\/habrastorage.org\/getpro\/habr\/post_images\/081\/720\/457\/081720457d72b3cf553b1aa2a700c082.png","https:\/\/habrastorage.org\/getpro\/habr\/post_images\/7ef\/6ff\/f19\/7ef6fff191525cf69cb680c3b763d791.jpg","https:\/\/habrastorage.org\/getpro\/habr\/post_images\/c8b\/14f\/3e8\/c8b14f3e8884f241202c48149b2cf16a.jpg","https:\/\/habrastorage.org\/webt\/a_\/bs\/aa\/a_bsaactpbr8fltzymtkhqbw1d4.png"]}</script>
+  <script src="./Выделение и CSS _ Хабр_files/gpt.js.Без названия" async=""></script>
+  <style>.grecaptcha-badge{visibility: hidden;}</style>
+  <meta name="habr-version" content="2.52.0">
+  
+  <meta data-vue-meta="ssr" property="fb:app_id" content="444736788986613"><meta data-vue-meta="ssr" property="fb:pages" content="472597926099084"><meta data-vue-meta="ssr" name="twitter:card" content="summary_large_image"><meta data-vue-meta="ssr" name="twitter:site" content="@habr_com"><meta data-vue-meta="ssr" property="og:site_name" content="Хабр" data-vmid="og:site_name"><meta data-vue-meta="ssr" property="og:title" content="Выделение и CSS" data-vmid="og:title"><meta data-vue-meta="ssr" name="twitter:title" content="Выделение и CSS" data-vmid="twitter:title"><meta data-vue-meta="ssr" name="aiturec:title" content="Выделение и CSS" data-vmid="aiturec:title"><meta data-vue-meta="ssr" name="description" content="Навык выделения текста и других объектов сформировался у пользователей компьютеров много лет назад. Мы выделяем содержимое веб-страниц по разным причинам. Возможно, нужно скопировать текст и где-то..." data-vmid="description"><meta data-vue-meta="ssr" itemprop="description" content="Навык выделения текста и других объектов сформировался у пользователей компьютеров много лет назад. Мы выделяем содержимое веб-страниц по разным причинам. Возможно, нужно скопировать текст и где-то..." data-vmid="description:itemprop"><meta data-vue-meta="ssr" property="og:description" content="Навык выделения текста и других объектов сформировался у пользователей компьютеров много лет назад. Мы выделяем содержимое веб-страниц по разным причинам. Возможно, нужно скопировать текст и где-то..." data-vmid="og:description"><meta data-vue-meta="ssr" name="twitter:description" content="Навык выделения текста и других объектов сформировался у пользователей компьютеров много лет назад. Мы выделяем содержимое веб-страниц по разным причинам. Возможно, нужно скопировать текст и где-то..." data-vmid="twitter:description"><meta data-vue-meta="ssr" property="aiturec:description" content="Навык выделения текста и других объектов сформировался у пользователей компьютеров много лет назад. Мы выделяем содержимое веб-страниц по разным причинам. Возможно, нужно скопировать текст и где-то..." data-vmid="aiturec:description"><meta data-vue-meta="ssr" itemprop="image" content="https://habr.com/share/publication/500290/568e5ff93e512d62303ffd33434d29bb/" data-vmid="image:itemprop"><meta data-vue-meta="ssr" property="og:image" content="https://habr.com/share/publication/500290/568e5ff93e512d62303ffd33434d29bb/" data-vmid="og:image"><meta data-vue-meta="ssr" property="og:image:width" content="1200" data-vmid="og:image:width"><meta data-vue-meta="ssr" property="og:image:height" content="630" data-vmid="og:image:height"><meta data-vue-meta="ssr" property="aiturec:image" content="https://habr.com/share/publication/500290/568e5ff93e512d62303ffd33434d29bb/" data-vmid="aiturec:image"><meta data-vue-meta="ssr" name="twitter:image" content="https://habr.com/share/publication/500290/568e5ff93e512d62303ffd33434d29bb/" data-vmid="twitter:image"><meta data-vue-meta="ssr" property="vk:image" content="https://habr.com/share/publication/500290/568e5ff93e512d62303ffd33434d29bb/" data-vmid="vk:image"><meta data-vue-meta="ssr" property="aiturec:item_id" content="500290" data-vmid="aiturec:item_id"><meta data-vue-meta="ssr" property="aiturec:datetime" content="2020-05-04T10:45:01.000Z" data-vmid="aiturec:datetime"><meta data-vue-meta="ssr" property="og:type" content="article" data-vmid="og:type"><meta data-vue-meta="ssr" property="og:locale" content="ru_RU" data-vmid="og:locale"><meta data-vue-meta="ssr" name="keywords" content="CSS, разработка">
+  <link data-vue-meta="ssr" href="https://habr.com/ru/company/ruvds/blog/500290/" rel="og:url" data-vmid="og:url"><link data-vue-meta="ssr" href="https://habr.com/ru/rss/post/500290/?fl=ru" type="application/rss+xml" title="" rel="alternate" name="rss"><link data-vue-meta="ssr" href="https://habr.com/ru/company/ruvds/blog/500290/" rel="canonical" data-vmid="canonical"><link data-vue-meta="ssr" data-vmid="hreflang"><link data-vue-meta="ssr" image_src="image" href="https://habr.com/share/publication/500290/568e5ff93e512d62303ffd33434d29bb/" data-vmid="image:href">
+  <meta name="apple-mobile-web-app-status-bar-style" content="#303b44">
+  <meta name="msapplication-TileColor" content="#629FBC">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="shortcut icon" type="image/png" sizes="16x16" href="https://assets.habr.com/habr-web/img/favicons/favicon-16.png">
+  <link rel="shortcut icon" type="image/png" sizes="32x32" href="https://assets.habr.com/habr-web/img/favicons/favicon-32.png">
+  <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" type="image/png" sizes="152x152" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-180.png">
+  <link rel="apple-touch-icon" type="image/png" sizes="256x256" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-256.png">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_1136x640.png">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2436x1125.png">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_1792x828.png">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_828x1792.png">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_1334x750.png">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1242x2668.png">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2208x1242.png">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1125x2436.png">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1242x2208.png">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2732x2048.png">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2688x1242.png">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2224x1668.png">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_750x1334.png">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_2048x2732.png">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2388x1668.png">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1668x2224.png">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_640x1136.png">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1668x2388.png">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2048x1536.png">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1536x2048.png">
+  <link rel="mask-icon" color="#77a2b6" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-120.svg">
+  <link crossorigin="use-credentials" href="https://habr.com/manifest.webmanifest" rel="manifest">
+<meta http-equiv="origin-trial" content="AxujKG9INjsZ8/gUq8+dTruNvk7RjZQ1oFhhgQbcTJKDnZfbzSTE81wvC2Hzaf3TW4avA76LTZEMdiedF1vIbA4AAABueyJvcmlnaW4iOiJodHRwczovL2ltYXNkay5nb29nbGVhcGlzLmNvbTo0NDMiLCJmZWF0dXJlIjoiVHJ1c3RUb2tlbnMiLCJleHBpcnkiOjE2NTI3NzQ0MDAsImlzVGhpcmRQYXJ0eSI6dHJ1ZX0="><meta http-equiv="origin-trial" content="Azuce85ORtSnWe1MZDTv68qpaW3iHyfL9YbLRy0cwcCZwVnePnOmkUJlG8HGikmOwhZU22dElCcfrfX2HhrBPAkAAAB7eyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiVHJ1c3RUb2tlbnMiLCJleHBpcnkiOjE2NTI3NzQ0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A16nvcdeoOAqrJcmjLRpl1I6f3McDD8EfofAYTt/P/H4/AWwB99nxiPp6kA0fXoiZav908Z8etuL16laFPUdfQsAAACBeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiVHJ1c3RUb2tlbnMiLCJleHBpcnkiOjE2NTI3NzQ0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="AxBHdr0J44vFBQtZUqX9sjiqf5yWZ/OcHRcRMN3H9TH+t90V/j3ENW6C8+igBZFXMJ7G3Pr8Dd13632aLng42wgAAACBeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiVHJ1c3RUb2tlbnMiLCJleHBpcnkiOjE2NTI3NzQ0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A88BWHFjcawUfKU3lIejLoryXoyjooBXLgWmGh+hNcqMK44cugvsI5YZbNarYvi3roc1fYbHA1AVbhAtuHZflgEAAAB2eyJvcmlnaW4iOiJodHRwczovL2dvb2dsZS5jb206NDQzIiwiZmVhdHVyZSI6IlRydXN0VG9rZW5zIiwiZXhwaXJ5IjoxNjUyNzc0NDAwLCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="A8FHS1NmdCwGqD9DwOicnHHY+y27kdWfxKa0YHSGDfv0CSpDKRHTQdQmZVPDUdaFWUsxdgVxlwAd6o+dhJykPA0AAACWeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiQ29udmVyc2lvbk1lYXN1cmVtZW50IiwiZXhwaXJ5IjoxNjQzMTU1MTk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlLCJ1c2FnZSI6InN1YnNldCJ9"><meta http-equiv="origin-trial" content="A8zdXi6dr1hwXEUjQrYiyYQGlU3557y5QWDnN0Lwgj9ePt66XMEvNkVWOEOWPd7TP9sBQ25X0Q15Lr1Nn4oGFQkAAACceyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiQ29udmVyc2lvbk1lYXN1cmVtZW50IiwiZXhwaXJ5IjoxNjQzMTU1MTk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlLCJ1c2FnZSI6InN1YnNldCJ9"><meta http-equiv="origin-trial" content="A4/Htern2udN9w3yJK9QgWQxQFruxOXsXL7cW60DyCl0EZFGCSme/J33Q/WzF7bBkVvhEWDlcBiUyZaim5CpFQwAAACceyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiQ29udmVyc2lvbk1lYXN1cmVtZW50IiwiZXhwaXJ5IjoxNjQzMTU1MTk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlLCJ1c2FnZSI6InN1YnNldCJ9"><script src="./Выделение и CSS _ Хабр_files/pubads_impl_2021120201.js.Без названия" async=""></script><script charset="utf-8" src="./Выделение и CSS _ Хабр_files/chunk-2d21ab85.4d06bd97.js.Без названия"></script><script charset="utf-8" src="./Выделение и CSS _ Хабр_files/hljs.400ae853.js.Без названия"></script><link rel="stylesheet" type="text/css" href="./Выделение и CSS _ Хабр_files/gallery.b17efef6.css"><script charset="utf-8" src="./Выделение и CSS _ Хабр_files/gallery.05aa8f5e.js.Без названия"></script><script charset="utf-8" src="./Выделение и CSS _ Хабр_files/chunk-2d222042.bdf40a76.js.Без названия"></script><script data-vue-meta="ssr" onload="window[&#39;e0044d29c024&#39;] = true" src="./Выделение и CSS _ Хабр_files/saved_resource" data-vmid="checklogin"></script><script charset="utf-8" src="./Выделение и CSS _ Хабр_files/photoswipe.2b48f110.js.Без названия"></script></head>
+<body>
+
+
+<div id="app" data-async-called="true"><div class="tm-layout__wrapper"><!----> <div></div> <!----> <header class="tm-header"><div class="tm-page-width"><div class="tm-header__container"><!----> <span class="tm-header__logo-wrap"><a href="https://habr.com/ru/" class="tm-header__logo tm-header__logo_ru"><svg height="16" width="16" class="tm-svg-img tm-header__icon"><title>Хабр</title> <use xlink:href="/img/habr-logo-ru.svg#logo"></use></svg></a> <span class="tm-header__beta-sign" style="display:none;">β</span></span> <div class="tm-dropdown tm-header__projects"><div class="tm-dropdown__head"><button class="tm-header__dropdown-toggle"><svg height="16" width="16" class="tm-svg-img tm-header__icon tm-header__icon_dropdown"><title>Открыть список</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#arrow-down"></use></svg></button></div> <!----></div> <a href="https://habr.com/ru/sandbox/start/" class="tm-header__become-author-btn">
+            Как стать автором
+          </a> <!----> <a href="https://effect.habr.com/s/10vmp77DP4A1tuuiFdSm8Q.93DSkWY-5XlFibyChtAo2XTrWcSKbKkxqHWxNOdckjRRY0J-ckb2_9ojuUq5Vs-HLmzSCoI3MVpricu35ybELKz2NAcXzkOFnfQN204UjeE" target="_blank" class="tm-top-link" style="color: rgb(153, 255, 167);">
+  Open Source vs коробки: вебкаст
+</a> <!----></div></div></header> <div class="tm-layout"><div class="tm-page-progress-bar"></div> <div data-menu-sticky="true" class="tm-base-layout__header tm-base-layout__header_is-sticky"><div class="tm-page-width"><div class="tm-base-layout__header-wrapper"><div class="tm-main-menu"><div class="tm-main-menu__section"><nav class="tm-main-menu__section-content"><!----> <a href="https://habr.com/ru/all/" class="tm-main-menu__item">
+        Все потоки
+      </a> <a href="https://habr.com/ru/flows/develop/" class="tm-main-menu__item">
+          Разработка
+        </a><a href="https://habr.com/ru/flows/admin/" class="tm-main-menu__item">
+          Администрирование
+        </a><a href="https://habr.com/ru/flows/design/" class="tm-main-menu__item">
+          Дизайн
+        </a><a href="https://habr.com/ru/flows/management/" class="tm-main-menu__item">
+          Менеджмент
+        </a><a href="https://habr.com/ru/flows/marketing/" class="tm-main-menu__item">
+          Маркетинг
+        </a><a href="https://habr.com/ru/flows/popsci/" class="tm-main-menu__item">
+          Научпоп
+        </a></nav></div></div> <div class="tm-header-user-menu tm-base-layout__user-menu"><a href="https://habr.com/ru/search/" class="tm-header-user-menu__item tm-header-user-menu__search"><svg height="24" width="24" class="tm-svg-img tm-header-user-menu__icon tm-header-user-menu__icon_search tm-header-user-menu__icon_dark"><title>Поиск</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#search"></use></svg></a> <!----> <!----> <!----> <div class="tm-header-user-menu__item tm-header-user-menu__user_desktop"><div class="tm-dropdown"><div class="tm-dropdown__head"><svg height="24" width="24" data-test-id="menu-toggle-guest" class="tm-svg-img tm-header-user-menu__icon"><title>Профиль</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#header-user"></use></svg> <!----></div> <!----></div> <!----></div> <!----></div></div></div></div> <button class="tm-scroll-top"><span title="Наверх" class="tm-svg-icon__wrapper tm-scroll-top__arrow"><svg height="16" width="16" class="tm-svg-img tm-svg-icon"><title>Наверх</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#small-arrow"></use></svg></span></button> <div class="tm-page-width"></div> <main class="tm-layout__container"><div hl="ru" companyname="ruvds" data-async-called="true" class="tm-page"><div class="tm-page-width"><div class="tm-page__header"><div class="tm-company-card__branding tm-company-article__branding"><!----> <a href="https://bit.ly/30z0Qws"><img src="./Выделение и CSS _ Хабр_files/35c9434663115a60b6f715f1c8b4a800.png" width="100%" class="tm-company-card__branding-image"></a></div></div> <div class="tm-page__wrapper"><div class="tm-page__main tm-page__main_has-sidebar"><div class="pull-down"><div class="pull-down__header" style="height:0px;"><div class="pull-down__content" style="bottom:10px;"><svg height="24" width="24" class="tm-svg-img pull-down__arrow"><title>Обновить</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#pull-arrow"></use></svg></div></div> <div class="tm-article-presenter"><div class="tm-company-card tm-company-article__company-card"><div class="tm-company-card__info"><div class="tm-company-card__header"><a href="https://habr.com/ru/company/ruvds/profile/" class="tm-company-card__avatar"><div class="tm-entity-image"><img alt="" height="48" src="./Выделение и CSS _ Хабр_files/f27ea85bd62fbd985c308110885af7e0.png" width="48" class="tm-entity-image__pic"></div></a> <!----> <div class="tm-rating tm-company-card__rating"><div class="tm-rating__header"> <div class="tm-rating__counter">2491.71</div></div> <div class="tm-rating__text">
+    Рейтинг
+  </div></div></div> <div class="tm-company-card__info"><a href="https://habr.com/ru/company/ruvds/profile/" class="tm-company-card__name">
+        RUVDS.com
+      </a> <div class="tm-company-card__description">VDS/VPS-хостинг. Скидка 10% по коду <b>HABR10</b></div></div></div> <div class="tm-company-card__buttons"><!----> <!----></div></div> <div class="tm-article-presenter__body"><div class="tm-misprint-area"><div class="tm-misprint-area__wrapper"><article class="tm-article-presenter__content tm-article-presenter__content_narrow"><div class="tm-article-presenter__header"> <div class="tm-article-snippet tm-article-presenter__snippet"><div class="tm-article-snippet__meta-container"><div class="tm-article-snippet__meta"><span class="tm-user-info tm-article-snippet__author"><a href="https://habr.com/ru/users/ru_vds/" title="ru_vds" class="tm-user-info__userpic"><div class="tm-entity-image"><img alt="" height="24" src="./Выделение и CSS _ Хабр_files/e36812d3de38eb3d479d7a13228717ef.png" width="24" class="tm-entity-image__pic"></div></a> <span class="tm-user-info__user"><a href="https://habr.com/ru/users/ru_vds/" class="tm-user-info__username">
+      ru_vds
+    </a> </span></span> <span class="tm-article-snippet__datetime-published"><time datetime="2020-05-04T10:45:01.000Z" title="2020-05-04, 14:45">4  мая  2020 в 14:45</time></span></div> <!----></div> <h1 lang="ru" class="tm-article-snippet__title tm-article-snippet__title_h1"><span>Выделение и CSS</span></h1> <div class="tm-article-snippet__hubs"><span class="tm-article-snippet__hubs-item"><a href="https://habr.com/ru/company/ruvds/blog/" class="tm-article-snippet__hubs-item-link router-link-active"><span>Блог компании RUVDS.com</span> <!----></a></span><span class="tm-article-snippet__hubs-item"><a href="https://habr.com/ru/hub/webdev/" class="tm-article-snippet__hubs-item-link"><span>Разработка веб-сайтов</span> <span title="Профильный хаб" class="tm-article-snippet__profiled-hub">*</span></a></span><span class="tm-article-snippet__hubs-item"><a href="https://habr.com/ru/hub/css/" class="tm-article-snippet__hubs-item-link"><span>CSS</span> <span title="Профильный хаб" class="tm-article-snippet__profiled-hub">*</span></a></span></div> <div class="tm-article-snippet__labels"><div class="tm-article-snippet__label tm-article-snippet__label_variant-translation"><span>
+        Перевод
+      </span></div></div> <!----> <!----></div></div> <div class="tm-article-presenter__origin"><a href="https://ishadeed.com/article/selection-in-css/" target="_blank" class="tm-article-presenter__origin-link">
+                Автор оригинала:
+                <span>
+                  Ahmad Shadeed
+                </span></a></div> <div data-gallery-root="" lang="ru" class="tm-article-body"><div id="post-content-body" class="article-formatted-body article-formatted-body_version-1"><div xmlns="http://www.w3.org/1999/xhtml">Навык выделения текста и других объектов сформировался у пользователей компьютеров много лет назад. Мы выделяем содержимое веб-страниц по разным причинам. Возможно, нужно скопировать текст и где-то его процитировать, возможно — кому-то просто легче читать текст, выделяя его фрагменты. На мобильных устройствах, правда, выделять что-либо сложнее. Меня, например, это раздражает. Мне не нравится выделять содержимое веб-страниц на телефоне. Эта операция кажется какой-то «неправильной».<br>
+<br>
+<a href="https://habr.com/ru/company/ruvds/blog/500290/"><img src="./Выделение и CSS _ Хабр_files/qmwtvgphijaluf7aun0uch7jm6o.jpeg" data-src="https://habrastorage.org/webt/qm/wt/vg/qmwtvgphijaluf7aun0uch7jm6o.jpeg" data-blurred="true"></a><br>
+<br>
+В этом материале я расскажу обо всём, что нужно знать о стилизации выделений средствами CSS. В частности, речь пойдёт о псевдоэлементе <code>::selection</code> и о свойстве <code>user-select</code>. Эта статья направлена на то, чтобы показать всем желающим возможности CSS по работе с выделениями, и на то, чтобы рассказать о том, когда и как использовать разные методы работы с выделениями.<br>
+<a name="habracut"></a><br>
+<h2><font color="#3AC1EF">Основы</font></h2><br>
+На <a href="https://developer.mozilla.org/ru/docs/Web/CSS/::selection">MDN</a> можно узнать о том, что псевдоэлемент <code>::selection</code> позволяет применить стили к части документа, который был выделен пользователем (например, с помощью мыши).<br>
+<br>
+Для использования <code>::selection</code> достаточно воспользоваться следующей конструкцией:<br>
+<br>
+<pre><code class="css hljs"><span class="hljs-selector-tag">p</span><span class="hljs-selector-pseudo">::selection</span> {
+&nbsp;&nbsp;&nbsp;<span class="hljs-attribute">color</span>: <span class="hljs-number">#fff</span>;
+&nbsp;&nbsp;&nbsp;<span class="hljs-attribute">background-color</span>: <span class="hljs-number">#000</span>;&nbsp;
+}
+</code></pre><br>
+<br>
+<div style="text-align:center;"><img src="./Выделение и CSS _ Хабр_files/image-loader.svg" data-src="https://habrastorage.org/getpro/habr/post_images/da6/292/4da/da62924da5b208a48216f15626d9537e.png"></div><br>
+<i><font color="#999999">Выделенный текст</font></i><br>
+<br>
+<a href="https://codepen.io/shadeed/pen/22f0f50259fd73630b79e1b7cb041445">Вот</a> пример, с которым можно поэкспериментировать.<br>
+<br>
+<h2><font color="#3AC1EF">Свойства, поддерживаемые ::selection</font></h2><br>
+Стоить отметить, что псевдоэлемент <code>::selection</code> поддерживает только свойства <code>color</code>, <code>background</code> и <code>text-shadow</code>.<br>
+<br>
+<h2><font color="#3AC1EF">Настройка собственных эффектов выделения</font></h2><br>
+Что если нам нужно, чтобы выделение выглядело бы по-особенному? Например, чтобы выделение имело бы определённую высоту или некий интересный фон? Взгляните на следующий рисунок.<br>
+<br>
+<div style="text-align:center;"><img src="./Выделение и CSS _ Хабр_files/4292b17e11cd0a635acedfd26e7180a5.jpg" data-src="https://habrastorage.org/getpro/habr/post_images/429/2b1/7e1/4292b17e11cd0a635acedfd26e7180a5.jpg" data-blurred="true"></div><br>
+<i><font color="#999999">Пример особой настройки выделения</font></i><br>
+<br>
+Это возможно, хотя и потребует приложения некоторых усилий. Вот как сделано выделение, показанное выше:<br>
+<br>
+<ul>
+<li>Добавлен псевдоэлемент, с тем же текстом, который мы выделяем. Затем псевдоэлементу задано свойство <code>height: 50%</code> и белый фоновый цвет.</li>
+<li>Псевдоэлемент расположен над исходным текстом.</li>
+</ul><br>
+Если теперь выделить текст, то псевдоэлемент перекроет 50% текста по вертикали. Это позволяет сымитировать нужный нам эффект.<br>
+<br>
+<pre><code class="css hljs"><span class="hljs-selector-tag">p</span> {
+&nbsp;&nbsp;<span class="hljs-attribute">position</span>: relative;
+&nbsp;&nbsp;<span class="hljs-attribute">color</span>: <span class="hljs-number">#fff</span>;
+}
+
+<span class="hljs-selector-tag">p</span><span class="hljs-selector-pseudo">:after</span> {
+&nbsp;&nbsp;<span class="hljs-attribute">content</span>: <span class="hljs-built_in">attr</span>(data-content);
+&nbsp;&nbsp;<span class="hljs-attribute">position</span>: absolute;
+&nbsp;&nbsp;<span class="hljs-attribute">color</span>: <span class="hljs-number">#000</span>;
+&nbsp;&nbsp;<span class="hljs-attribute">top</span>: <span class="hljs-number">0</span>;
+&nbsp;&nbsp;<span class="hljs-attribute">left</span>: <span class="hljs-number">0</span>;
+&nbsp;&nbsp;<span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+&nbsp;&nbsp;<span class="hljs-attribute">height</span>: <span class="hljs-number">50%</span>;
+&nbsp;&nbsp;<span class="hljs-attribute">background-color</span>: <span class="hljs-number">#fff</span>;
+}
+
+<span class="hljs-selector-tag">p</span><span class="hljs-selector-pseudo">::selection</span> {
+&nbsp;&nbsp;<span class="hljs-attribute">background</span>: <span class="hljs-built_in">rgba</span>(<span class="hljs-number">76</span>, <span class="hljs-number">125</span>, <span class="hljs-number">225</span>, <span class="hljs-number">0.18</span>);
+}
+</code></pre><br>
+Об этой методике я узнал <a href="https://stackoverflow.com/questions/41260365/how-to-apply-a-background-color-to-only-half-of-the-text-on-selecting">здесь</a>.<br>
+<br>
+Ещё один вариант подобного выделения представлен ниже. Здесь я, вместо сплошного выделения, реализовал выделение в виде CSS-градиента. Смысл тут заключается в использовании белого градиента с высотой в 50% и в однократном заполнении элемента фоновым рисунком благодаря использованию значения <code>no-repeat</code> при настройке свойства <code>background</code>.<br>
+<br>
+<pre><code class="css hljs"><span class="hljs-selector-tag">h1</span><span class="hljs-selector-pseudo">:after</span> {
+&nbsp;&nbsp;<span class="hljs-attribute">content</span>: <span class="hljs-built_in">attr</span>(data-content);
+&nbsp;&nbsp;<span class="hljs-attribute">position</span>: absolute;
+&nbsp;&nbsp;<span class="hljs-attribute">color</span>: <span class="hljs-number">#000</span>;
+&nbsp;&nbsp;<span class="hljs-attribute">top</span>: <span class="hljs-number">0</span>;
+&nbsp;&nbsp;<span class="hljs-attribute">left</span>: <span class="hljs-number">0</span>;
+&nbsp;&nbsp;<span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+&nbsp;&nbsp;<span class="hljs-attribute">background</span>: <span class="hljs-built_in">linear-gradient</span>(#fff, #fff) top/<span class="hljs-number">100%</span> <span class="hljs-number">50%</span> no-repeat;
+}
+</code></pre><br>
+На следующем рисунке показано разъяснение этой методики.<br>
+<br>
+<div style="text-align:center;"><img src="./Выделение и CSS _ Хабр_files/a7c089ab5677db1f5c0ef17745f09238.jpg" data-src="https://habrastorage.org/getpro/habr/post_images/a7c/089/ab5/a7c089ab5677db1f5c0ef17745f09238.jpg" data-blurred="true"></div><br>
+<i><font color="#999999">Реализация градиентного выделения</font></i><br>
+<br>
+Надеюсь, я смог понятно объяснить эту идею. <a href="https://codepen.io/shadeed/pen/5074964e902cd83d96e5ce7ba9ee1423?editors=1100">Вот</a> рабочий пример.<br>
+<br>
+<h2><font color="#3AC1EF">Анимирование выделения</font></h2><br>
+Работая над предыдущим примером, я задался следующим вопросом: «Реально ли анимировать выделение?». Например, в процессе выделения текста высота выделения составляет 50%. А когда указатель мыши уводят в сторону, высота выделения увеличивается до 80%. Как это сделать? А вот так:<br>
+<br>
+<pre><code class="css hljs"><span class="hljs-selector-tag">p</span> {
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attribute">transition</span>: background <span class="hljs-number">0.3s</span> ease-out;
+}
+
+<span class="hljs-selector-tag">p</span><span class="hljs-selector-pseudo">:hover</span><span class="hljs-selector-pseudo">:after</span> {
+&nbsp;&nbsp;<span class="hljs-attribute">background-size</span>: <span class="hljs-number">100%</span> <span class="hljs-number">80%</span>;
+}
+</code></pre><br>
+<br>
+<div style="text-align:center;"><img src="./Выделение и CSS _ Хабр_files/image-loader.svg" data-src="https://habrastorage.org/getpro/habr/post_images/cea/a97/829/ceaa978295473fe6c033ffb06dceff44.png"></div><br>
+<i><font color="#999999">Текст в процессе выделения</font></i><br>
+<br>
+<div style="text-align:center;"><img src="./Выделение и CSS _ Хабр_files/image-loader.svg" data-src="https://habrastorage.org/getpro/habr/post_images/601/3c8/8a8/6013c88a84f4780258a61aa52fb69799.png"></div><br>
+<i><font color="#999999">Текст после завершения выделения</font></i><br>
+<br>
+<a href="https://ishadeed.com/assets/selection-css/selection-animation.mp4">Вот</a> видео, в котором демонстрируется анимированное выделение.<br>
+<br>
+<h2><font color="#3AC1EF">Многострочный текст</font></h2><br>
+Представленная выше методика настройки выделения, к сожалению, не подходит для многострочного текста. Для того чтобы, всё же, реализовать нечто подобное и для такого текста, нужно прибегнуть к возможностям JavaScript и поместить каждое слово во встроенный (строчный) элемент, например — в <code>&lt;span&gt;</code>. После того, как каждое слово окажется в собственном элементе <code>&lt;span&gt;</code>, к каждому из таких элементов надо добавить псевдоэлемент. А уже после этого к многострочному тексту можно применить вышеописанный эффект.<br>
+<br>
+Вот скрипт, позволяющий поместить каждое слово в <code>&lt;span&gt;</code>-контейнер:<br>
+<br>
+<pre><code class="css hljs"><span class="hljs-selector-tag">let</span> <span class="hljs-selector-tag">paragraph</span> = <span class="hljs-selector-tag">document</span><span class="hljs-selector-class">.querySelector</span>("<span class="hljs-selector-class">.text</span>");
+<span class="hljs-selector-tag">const</span> <span class="hljs-selector-tag">words</span> = <span class="hljs-selector-tag">paragraph</span><span class="hljs-selector-class">.textContent</span><span class="hljs-selector-class">.split</span>(" ");
+
+<span class="hljs-selector-tag">paragraph</span><span class="hljs-selector-class">.innerHTML</span> = "";
+
+<span class="hljs-selector-tag">words</span><span class="hljs-selector-class">.forEach</span>(<span class="hljs-selector-tag">function</span> (<span class="hljs-selector-tag">word</span>) {
+&nbsp;&nbsp;let wordItem = document.createElement("span");
+&nbsp;&nbsp;wordItem.setAttribute("data-word", word);
+&nbsp;&nbsp;wordItem.innerHTML = word + " ";
+&nbsp;&nbsp;paragraph.appendChild(wordItem);
+});
+</code></pre><br>
+После этого элементы <code>&lt;span&gt;</code> надо стилизовать. Затем к каждому из них надо добавить псевдоэлемент:<br>
+<br>
+<pre><code class="css hljs"><span class="hljs-selector-tag">span</span> {
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attribute">position</span>: relative;
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attribute">font-size</span>: <span class="hljs-number">1.25rem</span>;
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attribute">line-height</span>: <span class="hljs-number">1.4</span>;
+&nbsp;&nbsp;}
+
+&nbsp;&nbsp;<span class="hljs-selector-tag">span</span><span class="hljs-selector-pseudo">::after</span> {
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attribute">content</span>: <span class="hljs-built_in">attr</span>(data-word);
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attribute">position</span>: absolute;
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attribute">left</span>: <span class="hljs-number">0</span>;
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attribute">right</span>: <span class="hljs-number">0</span>;
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attribute">top</span>: -<span class="hljs-number">0.28em</span>;
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attribute">height</span>: <span class="hljs-number">75%</span>;
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attribute">padding-top</span>: <span class="hljs-number">0.14em</span>;
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attribute">background</span>: <span class="hljs-number">#fff</span>;
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attribute">pointer-events</span>: none;
+&nbsp;&nbsp;}
+
+&nbsp;&nbsp;<span class="hljs-selector-tag">span</span><span class="hljs-selector-pseudo">::selection</span> {
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attribute">background</span>: <span class="hljs-built_in">rgba</span>(#<span class="hljs-number">4</span>C7DE1, <span class="hljs-number">0.18</span>);
+&nbsp;&nbsp;}
+</code></pre><br>
+Если посмотреть на эту конструкцию в деле, то окажется, что она работает, но не совсем так, как можно ожидать. Ниже показан пример выделения многострочного текста. Можно заметить, что выделение выглядит неоднородным.<br>
+<br>
+<div style="text-align:center;"><img src="./Выделение и CSS _ Хабр_files/image-loader.svg" data-src="https://habrastorage.org/getpro/habr/post_images/a92/dce/85a/a92dce85a3e3829239301a964b55eb89.png"></div><br>
+<i><font color="#999999">Неоднородное выделение</font></i><br>
+<br>
+Я бы сказал, что подобное многострочное выделение получается не очень хорошим, и что его не стоит использовать в глобальном масштабе. Возможно, его стоит применять лишь, скажем, для организации выделения какого-то отдельного абзаца.<br>
+<br>
+<a href="https://ishadeed.com/article/selection-in-css/">Тут</a> с таким выделением можно поэкспериментировать.<br>
+<br>
+<h2><font color="#3AC1EF">Креативный подход к использованию ::selection и text-shadow</font></h2><br>
+Так как одним из свойств, которые поддерживает псевдоэлемент <code>::selection</code>, является <code>text-shadow</code>, мы можем попытаться достичь каких-нибудь интересных эффектов, используя несколько теней текста. Исследуем возможности, которые открывает перед нами эта идея.<br>
+<br>
+<h3><font color="#3AC1EF">▍Выделение с длинными тенями</font></h3><br>
+<div style="text-align:center;"><img src="./Выделение и CSS _ Хабр_files/image-loader.svg" data-src="https://habrastorage.org/getpro/habr/post_images/773/92c/0d0/77392c0d0445d137339b65f9d685d720.png"></div><br>
+<i><font color="#999999">Выделенный текст отбрасывает длинные тени</font></i><br>
+<br>
+Вот как реализовать этот эффект:<br>
+<br>
+<pre><code class="css hljs"><span class="hljs-selector-tag">p</span><span class="hljs-selector-pseudo">::selection</span> {
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attribute">color</span>: <span class="hljs-number">#444444</span>;
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attribute">background</span>: <span class="hljs-number">#ffffff</span>;
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attribute">text-shadow</span>: <span class="hljs-number">1px</span> <span class="hljs-number">0px</span> <span class="hljs-number">1px</span> <span class="hljs-number">#cccccc</span>, <span class="hljs-number">0px</span> <span class="hljs-number">1px</span> <span class="hljs-number">1px</span> <span class="hljs-number">#eeeeee</span>, <span class="hljs-number">2px</span> <span class="hljs-number">1px</span> <span class="hljs-number">1px</span> <span class="hljs-number">#cccccc</span>, <span class="hljs-number">1px</span> <span class="hljs-number">2px</span> <span class="hljs-number">1px</span> <span class="hljs-number">#eeeeee</span>, <span class="hljs-number">3px</span> <span class="hljs-number">2px</span> <span class="hljs-number">1px</span> <span class="hljs-number">#cccccc</span>, <span class="hljs-number">2px</span> <span class="hljs-number">3px</span> <span class="hljs-number">1px</span> <span class="hljs-number">#eeeeee</span>, <span class="hljs-number">4px</span> <span class="hljs-number">3px</span> <span class="hljs-number">1px</span> <span class="hljs-number">#cccccc</span>, <span class="hljs-number">3px</span> <span class="hljs-number">4px</span> <span class="hljs-number">1px</span> <span class="hljs-number">#eeeeee</span>, <span class="hljs-number">5px</span> <span class="hljs-number">4px</span> <span class="hljs-number">1px</span> <span class="hljs-number">#cccccc</span>, <span class="hljs-number">4px</span> <span class="hljs-number">5px</span> <span class="hljs-number">1px</span> <span class="hljs-number">#eeeeee</span>, <span class="hljs-number">6px</span> <span class="hljs-number">5px</span> <span class="hljs-number">1px</span> <span class="hljs-number">#cccccc</span>, <span class="hljs-number">5px</span> <span class="hljs-number">6px</span> <span class="hljs-number">1px</span> <span class="hljs-number">#eeeeee</span>, <span class="hljs-number">7px</span> <span class="hljs-number">6px</span> <span class="hljs-number">1px</span> <span class="hljs-number">#cccccc</span>;
+}
+</code></pre><br>
+<h3><font color="#3AC1EF">▍Эффект контурного текста</font></h3><br>
+<div style="text-align:center;"><img src="./Выделение и CSS _ Хабр_files/image-loader.svg" data-src="https://habrastorage.org/getpro/habr/post_images/b81/c0d/118/b81c0d1187271d603e49991abe36154f.png"></div><br>
+<i><font color="#999999">Выделенный текст становится контурным</font></i><br>
+<br>
+Эту идею я нашёл в <a href="https://css-tricks.com/adding-stroke-to-web-text/">данной</a> статье. Речь идёт о том, что с помощью свойства <code>text-shadow</code> можно сымитировать эффект контурного текста.<br>
+<br>
+<pre><code class="css hljs"><span class="hljs-selector-tag">p</span><span class="hljs-selector-pseudo">::selection</span> {
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attribute">color</span>: <span class="hljs-number">#fff</span>;
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attribute">text-shadow</span>:&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<span class="hljs-number">1px</span> -<span class="hljs-number">1px</span> <span class="hljs-number">0</span> <span class="hljs-number">#000</span>,&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-number">1px</span> -<span class="hljs-number">1px</span> <span class="hljs-number">0</span> <span class="hljs-number">#000</span>,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<span class="hljs-number">1px</span> <span class="hljs-number">1px</span> <span class="hljs-number">0</span> <span class="hljs-number">#000</span>,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-number">1px</span> <span class="hljs-number">1px</span> <span class="hljs-number">0</span> <span class="hljs-number">#000</span>;
+}
+</code></pre><br>
+<h3><font color="#3AC1EF">▍Эффект размытия</font></h3><br>
+<div style="text-align:center;"><img src="./Выделение и CSS _ Хабр_files/image-loader.svg" data-src="https://habrastorage.org/getpro/habr/post_images/989/360/2ce/9893602ce0a18557a0a3f3871bec04ff.png"></div><br>
+<i><font color="#999999">Выделенный текст выглядит размытым</font></i><br>
+<br>
+Ещё один интересный эффект, который можно применить к выделенному тексту, заключается в размытии этого текста. Суть тут в том, чтобы использовать при настройке цвета текста свойство <code>color: transparent</code>. Тени, задаваемые с помощью <code>text-shadow</code>, при этом никуда не исчезнут, что и даст нужный эффект.<br>
+<br>
+<pre><code class="css hljs"><span class="hljs-selector-tag">p</span><span class="hljs-selector-pseudo">::selection</span> {
+&nbsp;&nbsp;<span class="hljs-attribute">color</span>: transparent;
+&nbsp;&nbsp;<span class="hljs-attribute">text-shadow</span>: <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">3px</span> <span class="hljs-number">#fff</span>;
+}
+</code></pre><br>
+Уверен, что вы сами сможете придумать ещё очень много примеров применения <code>text-shadow</code> для стилизации выделений. Это свойство даёт нам безграничные возможности.<br>
+<br>
+<h3><font color="#3AC1EF">▍Тени текстов и производительность</font></h3><br>
+Не рекомендуется использовать слишком сложные стили при настройке <code>text-shadow</code>. Дело в том, что чрезмерное увлечение этим свойством приводит к проблемам с производительностью. <a href="https://ishadeed.com/assets/selection-css/text-shadow-performance.mp4">Вот</a> видео, демонстрирующее один из примеров таких проблем.<br>
+<br>
+<div style="text-align:center;"><img src="./Выделение и CSS _ Хабр_files/image-loader.svg" data-src="https://habrastorage.org/getpro/habr/post_images/3a8/52c/ca7/3a852cca7a57ec4fae1780b6fe4a119a.png"></div><br>
+<i><font color="#999999">Использование очень сложных стилей при настройке выделения текста</font></i><br>
+<br>
+Представленный здесь неоновый эффект очень сложен. Обратите внимание на то, что при выделении этого текста заметна задержка между моментом выделения текста и моментом применения стилизации. Кроме того, обратите внимание на то, что сверху и слева появляется то, что появляться не должно. Поэтому прошу вас использовать <code>text-shadow</code> осмотрительно.<br>
+<br>
+<h2><font color="#3AC1EF">Выделяются ли элементы форм?</font></h2><br>
+Краткий ответ на вопрос, вынесенный в заголовок этого раздела, будет звучать как «да». Мне кажется, что это неправильно: выделяешь страницу, а оказывается, что содержимое внутри полей ввода тоже выделяется. Вот как это выглядит.<br>
+<br>
+<div style="text-align:center;"><img src="./Выделение и CSS _ Хабр_files/image-loader.svg" data-src="https://habrastorage.org/getpro/habr/post_images/efc/f04/cbf/efcf04cbfa7376728a35494117953c5b.png"></div><br>
+<i><font color="#999999">Содержимое внутри полей ввода выделяется</font></i><br>
+<br>
+Тут может быть выделен и текст внутри кнопки. В разделе, посвящённом <code>user-select</code>, мы поговорим о том, стоит или нет позволять пользователям выделять формы элементов.<br>
+<br>
+<a href="https://codepen.io/shadeed/pen/40ddda73c073f3cf9162023d6a314838">Вот</a> пример.<br>
+<br>
+<h2><font color="#3AC1EF">Исследование свойства user-select</font></h2><br>
+Свойство <code>user-select</code> даёт нам возможность задавать возможность выделения конкретного текста пользователем. Это свойство может оказаться полезным для отключения возможности выделения текста, что может пригодиться для ограничения возможностей пользователя по выделению материалов, расположенных рядом друг с другом. <a href="https://drafts.csswg.org/css-ui-4/#propdef-user-select">Вот</a> стандарт, описывающий <code>user-select</code>.<br>
+<br>
+Это свойство может принимать следующие значения: <code>none, auto, text, contain, all</code>.<br>
+<br>
+<h2><font color="#3AC1EF">Сценарии использования user-select</font></h2><br>
+<h3><font color="#3AC1EF">▍Текст и иконка</font></h3><br>
+Если в элементе есть текст и иконка — в виде символа или значка, взятого из какого-нибудь шрифта, то при выделении текста будет выделяться и эта иконка. Рассмотрим пример, представленный на следующем рисунке.<br>
+<br>
+<div style="text-align:center;"><img src="./Выделение и CSS _ Хабр_files/c2679c7f19fb705301f09710333a61db.jpg" data-src="https://habrastorage.org/getpro/habr/post_images/c26/79c/7f1/c2679c7f19fb705301f09710333a61db.jpg" data-blurred="true"></div><br>
+<i><font color="#999999">Кнопка с текстом и иконкой</font></i><br>
+<br>
+Вот код этой кнопки:<br>
+<br>
+<pre><code class="css hljs">&lt;<span class="hljs-selector-tag">button</span>&gt;<span class="hljs-selector-tag">Our</span> <span class="hljs-selector-tag">Services</span>&lt;<span class="hljs-selector-tag">span</span> <span class="hljs-selector-tag">aria-hidden</span>="<span class="hljs-selector-tag">true</span>"&gt;▼&lt;/<span class="hljs-selector-tag">span</span>&gt;&lt;/<span class="hljs-selector-tag">button</span>&gt;
+</code></pre><br>
+При выделении этого элемента он выглядит так, как показано ниже.<br>
+<br>
+<div style="text-align:center;"><img src="./Выделение и CSS _ Хабр_files/5c472ed6e4851aea24d08fd706215c0c.jpg" data-src="https://habrastorage.org/getpro/habr/post_images/5c4/72e/d6e/5c472ed6e4851aea24d08fd706215c0c.jpg" data-blurred="true"></div><br>
+<i><font color="#999999">Выделенная кнопка</font></i><br>
+<br>
+В подобном совершенно нет необходимости. Обратите внимание на то, что в разметке используется атрибут <code>aria-hidden</code>, скрывающий иконку от средств чтения с экрана. Для того чтобы решить проблему с выделение того, что выделять не нужно, мы можем воспользоваться следующим стилем:<br>
+<br>
+<pre><code class="css hljs"><span class="hljs-selector-tag">button</span> <span class="hljs-selector-tag">span</span><span class="hljs-selector-attr">[aria-hidden=<span class="hljs-string">"true"</span>]</span> {
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attribute">user-select</span>: none;
+}
+</code></pre><br>
+Это позволяет запретить выделение иконки. И, в то же время, мы привязываем запрет выделения к атрибуту <code>aria-hidden</code>. В результате всё, что не должно выделяться, скорее всего, не должно быть видимым и для средств чтения с экрана.<br>
+<br>
+<h3><font color="#3AC1EF">▍Флажки</font></h3><br>
+Меня раздражает такое поведение флажков, когда, устанавливая или снимая флажок, я случайно выделяю текст его описания. Вот как это выглядит.<br>
+<br>
+<div style="text-align:center;"><img src="./Выделение и CSS _ Хабр_files/d58f6a7159c291426170273b3fc27158.jpg" data-src="https://habrastorage.org/getpro/habr/post_images/d58/f6a/715/d58f6a7159c291426170273b3fc27158.jpg" data-blurred="true"></div><br>
+<i><font color="#999999">Текст описания флажка выделен случайно</font></i><br>
+<br>
+Решить эту проблему можно, стилизовав элемент <code>&lt;label&gt;</code> следующим образом:<br>
+<br>
+<pre><code class="css hljs"><span class="hljs-selector-tag">label</span> {
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attribute">user-select</span>: none;
+}
+</code></pre><br>
+<h3><font color="#3AC1EF">▍Выделение всего текста</font></h3><br>
+Значение <code>all</code>, которое может принимать свойство <code>user-select</code>, позволяет добиваться интересного эффекта. Если это свойство с таким значением есть у родительского элемента, то весь текст, содержащийся в таком элементе, можно выделить одним щелчком мыши. Это может оказаться полезным для работы с текстовым содержимым, которое должно выделяться целиком. Например — для выделения фрагментов кода, имеющихся на странице:<br>
+<br>
+<pre><code class="css hljs"><span class="hljs-selector-class">.embed-code</span> {
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attribute">user-select</span>: all;
+}
+</code></pre><br>
+Фрагмент текста, оформленный таким стилем, можно выделить одним щелчком мыши по нему.<br>
+<br>
+<h2><font color="#3AC1EF">Веб-приложения</font></h2><br>
+Веб-приложение должно восприниматься пользователем как настоящее приложение. Можно ли выделять текст кнопок в обычных приложениях? Нет, нельзя. Важно, чтобы веб-приложения отражали привычные черты обычных приложений, делая это даже с учётом того, что они созданы с использованием HTML и CSS.<br>
+<br>
+Рассмотрим несколько примеров из жизни.<br>
+<br>
+<h3><font color="#3AC1EF">▍Slack</font></h3><br>
+В Slack можно выделять метки и поля ввода. Однако тексты кнопок не выделяются.<br>
+<br>
+<div style="text-align:center;"><img src="./Выделение и CSS _ Хабр_files/image-loader.svg" data-src="https://habrastorage.org/getpro/habr/post_images/e45/cf4/550/e45cf4550417685e7c2d0f7d8886b2be.png"></div><br>
+<i><font color="#999999">Подписи кнопок не выделяются</font></i><br>
+<br>
+Вот ещё один пример.<br>
+<br>
+<div style="text-align:center;"><img src="./Выделение и CSS _ Хабр_files/image-loader.svg" data-src="https://habrastorage.org/getpro/habr/post_images/b27/268/bf1/b27268bf14cf0449e39f84b03ca94d14.png"></div><br>
+<i><font color="#999999">Подпись в заголовке модального окна выделяется</font></i><br>
+<br>
+А дату чата выделить нельзя.<br>
+<br>
+<div style="text-align:center;"><img src="./Выделение и CSS _ Хабр_files/image-loader.svg" data-src="https://habrastorage.org/getpro/habr/post_images/123/dc3/706/123dc3706fedd988cd7409a2784dbad9.png"></div><br>
+<i><font color="#999999">Дату выделить нельзя</font></i><br>
+<br>
+В целом — мне кажется странным то, что в приложении можно выделять некоторые тексты, которые, вроде бы, не должны поддерживать выделение. В интерфейсе Slack есть места, где используется <code>user-select: none</code>, но таких мест меньше, чем можно ожидать. Например мне, как пользователю, нет никакой выгоды от выделения заголовка модального окна.<br>
+<br>
+<h3><font color="#3AC1EF">▍Notion</font></h3><br>
+Подход к выделению элементов, реализованный в Notion, мне нравится больше. Это веб-приложение больше похоже на реальное приложение, а не на веб-сайт, любую часть интерфейса которого можно выделить.<br>
+<br>
+<div style="text-align:center;"><img src="./Выделение и CSS _ Хабр_files/image-loader.svg" data-src="https://habrastorage.org/getpro/habr/post_images/081/720/457/081720457d72b3cf553b1aa2a700c082.png"></div><br>
+<i><font color="#999999">То, что не должно выделяться, не выделяется</font></i><br>
+<br>
+Ни один фрагмент текста с этого рисунка не выделяется. Это — именно то, чего можно ожидать от приложения.<br>
+<br>
+<h2><font color="#3AC1EF">Не используйте глобальное отключение выделения</font></h2><br>
+Не рекомендуется отключать выделение глобально. Когда вы пользуетесь отключением выделения — постарайтесь, чтобы оно отключалось бы лишь у элементов, для которых оно не имеет смысла. Для этого можно создать вспомогательный класс. Например — такой:<br>
+<br>
+<pre><code class="css hljs"><span class="hljs-selector-class">.disable-selection</span> {
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attribute">-webkit-user-select</span>:text;
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attribute">-moz-user-select</span>:text;
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attribute">-ms-user-select</span>:text;
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attribute">user-select</span>:text;
+}
+</code></pre><br>
+<h2><font color="#3AC1EF">Нехороший паттерн</font></h2><br>
+Есть один UX-паттерн, который мне крайне не нравится. Он заключается в показе предупреждения при попытке выделения текста. Это раздражает и создаёт у пользователя такое ощущение, будто его взаимодействием с сайтом пытаются управлять. Пример этого паттерна показан ниже.<br>
+<br>
+<div style="text-align:center;"><img src="./Выделение и CSS _ Хабр_files/7ef6fff191525cf69cb680c3b763d791.jpg" data-src="https://habrastorage.org/getpro/habr/post_images/7ef/6ff/f19/7ef6fff191525cf69cb680c3b763d791.jpg" data-blurred="true"></div><br>
+<i><font color="#999999">Запрет выделения с показом уведомления</font></i><br>
+<br>
+Пожалуйста, не делайте так.<br>
+<br>
+<h2><font color="#3AC1EF">Выделение на мобильных устройствах</font></h2><br>
+Существует свойство <code>-webkit-touch-callout</code> для iOS Safari, которое должно отключать показ стандартной подсказки, выводимой при выделении текста. Я попытался воспользоваться этим свойством, но оно не работает.<br>
+<br>
+<pre><code class="css hljs"><span class="hljs-selector-tag">p</span> {
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attribute">-webkit-touch-callout</span>: none;
+}
+</code></pre><br>
+Стили <code>::selection</code> тоже не работают.<br>
+<br>
+А свойство <code>user-select: none</code> работает так, как ожидается.<br>
+<br>
+Я постарался найти реальный пример, иллюстрирующий эту проблему. Я скопировал фрагмент текста из Википедии. При этом был скопирован и совершенно ненужный мне текст <code>(listen)</code>. Это раздражает.<br>
+<br>
+<div style="text-align:center;"><img src="./Выделение и CSS _ Хабр_files/c8b14f3e8884f241202c48149b2cf16a.jpg" data-src="https://habrastorage.org/getpro/habr/post_images/c8b/14f/3e8/c8b14f3e8884f241202c48149b2cf16a.jpg" data-blurred="true"></div><br>
+<i><font color="#999999">Вместе с полезным текстом скопировано и (listen)</font></i><br>
+<br>
+Вместо того чтобы позволять пользователю копировать это вот «listen», лучше было бы добавить к этому элементу стиль <code>user-select: none</code>. В результате при копировании текста, содержащего этот элемент, он копироваться не будет.<br>
+<br>
+<h2><font color="#3AC1EF">Итоги</font></h2><br>
+Здесь мы рассмотрели методы настройки выделения элементов веб-страниц с использованием средств CSS. Возможно, вам интересно будет взглянуть и на <a href="https://css-tricks.com/force-selection-text-block/">этот</a> материал.<br>
+<br>
+<b>Уважаемые читатели!</b> Как вы настраиваете выделение текстов в своих проектах?<br>
+<br>
+<a href="https://ruvds.com/ru-rub/?utm_source=habr&amp;utm_medium=perevod&amp;utm_campaign=VydelenieCSS#order"><img data-src="https://habrastorage.org/webt/a_/bs/aa/a_bsaactpbr8fltzymtkhqbw1d4.png" src="./Выделение и CSS _ Хабр_files/a_bsaactpbr8fltzymtkhqbw1d4.png"></a></div></div> <div aria-hidden="true" role="dialog" tabindex="-1" class="pswp"><div class="pswp__bg"></div> <div class="pswp__scroll-wrap"><div class="pswp__container"><div class="pswp__item"></div> <div class="pswp__item"></div> <div class="pswp__item"></div></div> <div class="pswp__ui pswp__ui--hidden"><div class="pswp__top-bar"><span class="tm-svg-icon__wrapper pswp__button pswp__button--close"><svg height="16" width="16" class="tm-svg-img tm-svg-icon"><title>Закрыть</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#close"></use></svg></span> <div class="pswp__preloader"><div class="pswp__preloader__icn"><div class="pswp__preloader__cut"><div class="pswp__preloader__donut"></div></div></div></div></div></div></div></div> <!----></div> <div class="tm-article-presenter__meta"><div class="tm-separated-list tm-article-presenter__meta-list"><span class="tm-separated-list__title">Теги:</span> <ul class="tm-separated-list__list"><li class="tm-separated-list__item"><a href="https://habr.com/ru/search/?target_type=posts&amp;order=relevance&amp;q=%5BCSS%5D" class="tm-tags-list__link">CSS</a></li><li class="tm-separated-list__item"><a href="https://habr.com/ru/search/?target_type=posts&amp;order=relevance&amp;q=%5B%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0%5D" class="tm-tags-list__link">разработка</a></li></ul></div> <div class="tm-separated-list tm-article-presenter__meta-list"><span class="tm-separated-list__title">Хабы:</span> <ul class="tm-separated-list__list"><li class="tm-separated-list__item"><a href="https://habr.com/ru/company/ruvds/blog/" class="tm-hubs-list__link router-link-active">
+    Блог компании RUVDS.com
+  </a></li><li class="tm-separated-list__item"><a href="https://habr.com/ru/hub/webdev/" class="tm-hubs-list__link">
+    Разработка веб-сайтов
+  </a></li><li class="tm-separated-list__item"><a href="https://habr.com/ru/hub/css/" class="tm-hubs-list__link">
+    CSS
+  </a></li></ul></div></div></article></div> <!----></div> <div class="tm-article-sticky-panel"><div class="tm-data-icons tm-article-sticky-panel__icons"><div class="tm-article-rating tm-data-icons__item"><div class="tm-votes-meter tm-article-rating__votes-switcher"><svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-article"><title>Всего голосов 31: ↑31 и ↓0</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-rating"></use></svg> <span title="Всего голосов 31: ↑31 и ↓0" class="tm-votes-meter__value tm-votes-meter__value_positive tm-votes-meter__value_appearance-article tm-votes-meter__value_rating">+31</span></div> <div class="v-portal" style="display:none;"></div></div> <!----> <!----> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-data-icons__item"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon"><svg height="24" width="24" class="tm-svg-img tm-svg-icon"><title>Добавить в закладки</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-favorite"></use></svg></span> <span title="Количество пользователей, добавивших публикацию в закладки" class="bookmarks-button__counter">
+    122
+  </span></button> <div class="tm-article-comments-counter-link tm-data-icons__item" title="Читать комментарии"><a href="https://habr.com/ru/company/ruvds/blog/500290/comments/" class="tm-article-comments-counter-link__link"><svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon"><title>Комментарии</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-comments"></use></svg> <span class="tm-article-comments-counter-link__value">
+      6
+    </span></a> <!----></div> <div title="Поделиться" class="tm-sharing tm-data-icons__item"><button type="button" class="tm-sharing__button"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="tm-sharing__icon"><path fill="currentColor" d="M13.8 13.8V18l7.2-6.6L13.8 5v3.9C5 8.9 3 18.6 3 18.6c2.5-4.4 6-4.8 10.8-4.8z"></path></svg></button> <div class="v-portal" style="display:none;"></div></div> <div class="v-portal" style="display:none;"></div></div> </div></div> <!----> <!----> <div class="tm-article-presenter__footer"><div class="tm-article-blocks"><div class="tm-editoral-subscription"><span class="tm-svg-icon__wrapper tm-editoral-subscription__close"><svg height="16" width="16" class="tm-svg-img tm-svg-icon"><title>Закрыть</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#close"></use></svg></span> <h3 class="tm-editoral-subscription__title">
+    Редакторский дайджест
+  </h3> <p class="tm-editoral-subscription__description">
+    Присылаем лучшие статьи раз&nbsp;в&nbsp;месяц
+  </p> <form method="GET" class="tm-editoral-subscription__form"><div class="tm-input-text-decorated tm-editoral-subscription__input tm-input-text-decorated_has-label-after" name="email" placeholder="Электропочта" type="email"><!----> <input name="email" placeholder="Электропочта" type="email" class="tm-input-text-decorated__input"> <div class="tm-input-text-decorated__label tm-input-text-decorated__label_after"><button type="submit" class="tm-editoral-subscription__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class=""><path fill="currentColor" clip-rule="evenodd" d="M19.707 11.293a1 1 0 010 1.414l-5.5 5.5a1 1 0 01-1.414-1.414L16.586 13H5a1 1 0 110-2h11.586l-3.793-3.793a1 1 0 011.414-1.414l5.5 5.5z"></path></svg></button></div></div> <!----></form></div> <section class="tm-block tm-block_spacing-bottom"><!----> <div class="tm-block__body tm-block__body_variant-balanced"><div class="tm-article-author"><div class="tm-article-author__company"><div class="tm-article-author__company-card"><div class="tm-company-snippet"><a href="https://habr.com/ru/company/ruvds/profile/" class="tm-company-snippet__logo-link"><div class="tm-entity-image"><img alt="" height="40" src="./Выделение и CSS _ Хабр_files/f27ea85bd62fbd985c308110885af7e0.png" width="40" class="tm-entity-image__pic"></div></a> <div class="tm-company-snippet__info"><a href="https://habr.com/ru/company/ruvds/profile/" class="tm-company-snippet__title">RUVDS.com</a> <div class="tm-company-snippet__description">VDS/VPS-хостинг. Скидка 10% по коду <b>HABR10</b></div></div></div> <div class="tm-article-author__buttons"><!----> <!----></div></div> <div class="tm-article-author__company-contacts"><a href="https://facebook.com/ruvds" rel="noopener" target="_blank" class="tm-article-author__contact">
+      Facebook
+    </a><a href="https://twitter.com/ru_vds" rel="noopener" target="_blank" class="tm-article-author__contact">
+      Twitter
+    </a><a href="https://vk.com/ru_vds" rel="noopener" target="_blank" class="tm-article-author__contact">
+      ВКонтакте
+    </a></div> <div class="tm-article-author__separator"></div></div> <div class="tm-user-card tm-article-author__user-card tm-user-card_variant-article"><div class="tm-user-card__info-container"><div class="tm-user-card__header"><div class="tm-user-card__header-data"><a href="https://habr.com/ru/users/ru_vds/" class="tm-user-card__userpic tm-user-card__userpic_size-40"><div class="tm-entity-image"><img alt="" src="./Выделение и CSS _ Хабр_files/e36812d3de38eb3d479d7a13228717ef(1).png" class="tm-entity-image__pic"></div></a> <div class="tm-user-card__meta"><div title=" 978 голосов " class="tm-karma tm-user-card__karma"><div class="tm-karma__votes tm-karma__votes_positive">
+    227.5
+  </div> <div class="tm-karma__text">
+    Карма
+  </div></div> <div title="Рейтинг пользователя" class="tm-rating tm-user-card__rating"><div class="tm-rating__header"> <div class="tm-rating__counter">237.3</div></div> <div class="tm-rating__text">
+    Рейтинг
+  </div></div></div></div></div> <div class="tm-user-card__info tm-user-card__info_variant-article"><div class="tm-user-card__title tm-user-card__title_variant-article"><!----> <a href="https://habr.com/ru/users/ru_vds/" class="tm-user-card__nickname tm-user-card__nickname_variant-article">
+          @ru_vds
+        </a> <!----></div> <p class="tm-user-card__short-info tm-user-card__short-info_variant-article">Пользователь</p></div></div> <div class="tm-user-card__buttons tm-user-card__buttons_variant-article"><!----> <!----> <!----> <!----> <!----></div></div> <!----></div> <div class="v-portal" style="display:none;"></div></div> <!----></section> <div class="tm-article-blocks__comments"><div class="tm-article-page-comments"><div class="tm-article-comments-client-rendered"><div class="tm-article-comments"><div class="tm-comments-wrapper"><div class="tm-comments-wrapper__wrapper"><header class="tm-comments-wrapper__header"><h2 class="tm-comments-wrapper__title">
+        Комментарии
+        <span class="tm-comments-wrapper__comments-count">
+          6
+        </span></h2> <div class="tm-comments-wrapper__header-aside"><!----> <button class="tm-rss-button tm-rss-button_comments-header"><span class="tm-svg-icon__wrapper tm-rss-button__icon"><svg height="16" width="16" class="tm-svg-img tm-svg-icon"><title>Скопировать ссылку на RSS</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#rss"></use></svg></span></button> <!----></div></header> <div class="tm-comments-wrapper__inner"> <div class="tm-comments__tree"><section class="tm-comment-thread"><!----> <article class="tm-comment-thread__comment"><a name="comment_21576006" class="tm-comment-thread__target"></a> <button class="tm-comment-thread__breadcrumbs tm-comment-thread__indent_b_l-0"><div class="tm-comment-thread__circle"></div></button> <!----> <div data-comment-body="21576006" class="tm-comment-thread__indent_l-0"><div data-gallery-root="" class="tm-comment"><header data-comment-header="" tabindex="-1" class="tm-comment__header"><div class="tm-comment__header-inner"><span class="tm-user-info tm-comment__user-info"><a href="https://habr.com/ru/users/goldsteals/" class="tm-user-info__userpic" title="goldsteals"><div class="tm-entity-image"><img alt="" height="24" src="./Выделение и CSS _ Хабр_files/9bb18e273c869394fc9601f3468acf70.jpg" width="24" class="tm-entity-image__pic"></div></a> <span class="tm-user-info__user"><a href="https://habr.com/ru/users/goldsteals/" class="tm-user-info__username">
+      goldsteals
+    </a> <a href="https://habr.com/ru/company/ruvds/blog/500290/#comment_21576006" class="tm-comment-thread__comment-link">
+                05.05.2020 в 05:21
+                <!----></a></span></span></div> <div class="tm-comment__buttons"><!----> <!----></div></header> <div class="tm-comment__body-content"><div xmlns="http://www.w3.org/1999/xhtml">Мне кажется, лучшее, что можно сделать с выделением текста, это не менять его вид никогда.</div></div> <!----> <!----></div> <div class="tm-comment-footer"><div class="tm-votes-meter tm-comment-footer__votes-meter"><svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-comment"><title>Всего голосов 10: ↑9 и ↓1</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-rating"></use></svg> <span title="Всего голосов 10: ↑9 и ↓1" class="tm-votes-meter__value tm-votes-meter__value_positive tm-votes-meter__value_appearance-comment tm-votes-meter__value_rating">+8</span></div> <button type="button" class="tm-comment-thread__button">
+                  Ответить
+                </button> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-comment-footer__button tm-comment-footer__button_with-icon"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon"><svg height="24" width="24" class="tm-svg-img tm-svg-icon"><title>Добавить в закладки</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-favorite"></use></svg></span> <!----></button> <button data-comment-popup="21576006" class="tm-comment__button tm-comment__button_with-icon"><svg height="16" width="16" class="tm-svg-img tm-comment__icon tm-comment__icon_dots"><title>Ещё</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#dots"></use></svg></button> <!----></div></div></article> <div class="tm-comment-thread__children"><section class="tm-comment-thread"><!----> <article class="tm-comment-thread__comment"><a name="comment_21576568" class="tm-comment-thread__target"></a> <button class="tm-comment-thread__breadcrumbs tm-comment-thread__indent_b_l-1"><div class="tm-comment-thread__circle"></div></button> <!----> <div data-comment-body="21576568" class="tm-comment-thread__indent_l-1"><div data-gallery-root="" class="tm-comment"><header data-comment-header="" tabindex="-1" class="tm-comment__header"><div class="tm-comment__header-inner"><span class="tm-user-info tm-comment__user-info"><a href="https://habr.com/ru/users/Lestok/" class="tm-user-info__userpic" title="Lestok"><div class="tm-entity-image"><img alt="" height="24" src="./Выделение и CSS _ Хабр_files/bc559a0eaf00a1a180bcc2926eaf4a47.jpg" width="24" class="tm-entity-image__pic"></div></a> <span class="tm-user-info__user"><a href="https://habr.com/ru/users/Lestok/" class="tm-user-info__username">
+      Lestok
+    </a> <a href="https://habr.com/ru/company/ruvds/blog/500290/#comment_21576568" class="tm-comment-thread__comment-link">
+                05.05.2020 в 12:16
+                <!----></a></span></span></div> <div class="tm-comment__buttons"><button type="button" class="tm-comment__button tm-comment__button_with-icon"><svg height="16" width="16" class="tm-svg-img tm-comment__icon"><title>Показать предыдущий комментарий</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#small-arrow"></use></svg></button> <!----></div></header> <div class="tm-comment__body-content"><div xmlns="http://www.w3.org/1999/xhtml"><blockquote>...<i>лучшее, что можно сделать с выделением текста, это <b>не</b> менять его вид <b>никогда</b></i>.</blockquote>Уважаемый <b>goldsteals,</b> почему именно Вы так считаете?</div></div> <!----> <!----></div> <div class="tm-comment-footer"><div class="tm-votes-meter tm-comment-footer__votes-meter"><svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-comment"><title>Всего голосов 2: ↑1 и ↓1</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-rating"></use></svg> <span title="Всего голосов 2: ↑1 и ↓1" class="tm-votes-meter__value tm-votes-meter__value_appearance-comment tm-votes-meter__value_rating">0</span></div> <button type="button" class="tm-comment-thread__button">
+                  Ответить
+                </button> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-comment-footer__button tm-comment-footer__button_with-icon"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon"><svg height="24" width="24" class="tm-svg-img tm-svg-icon"><title>Добавить в закладки</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-favorite"></use></svg></span> <!----></button> <button data-comment-popup="21576568" class="tm-comment__button tm-comment__button_with-icon"><svg height="16" width="16" class="tm-svg-img tm-comment__icon tm-comment__icon_dots"><title>Ещё</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#dots"></use></svg></button> <!----></div></div></article> <div class="tm-comment-thread__children"><section class="tm-comment-thread"><!----> <article class="tm-comment-thread__comment"><a name="comment_21592346" class="tm-comment-thread__target"></a> <button class="tm-comment-thread__breadcrumbs tm-comment-thread__indent_b_l-2"><div class="tm-comment-thread__circle"></div></button> <!----> <div data-comment-body="21592346" class="tm-comment-thread__indent_l-2"><div data-gallery-root="" class="tm-comment"><header data-comment-header="" tabindex="-1" class="tm-comment__header"><div class="tm-comment__header-inner"><span class="tm-user-info tm-comment__user-info"><a href="https://habr.com/ru/users/tolfy/" class="tm-user-info__userpic" title="tolfy"><div class="tm-entity-image"><img alt="" height="24" src="./Выделение и CSS _ Хабр_files/d2d6e401b5f0f937612d668b8814b5bf.jpg" width="24" class="tm-entity-image__pic"></div></a> <span class="tm-user-info__user"><a href="https://habr.com/ru/users/tolfy/" class="tm-user-info__username">
+      tolfy
+    </a> <a href="https://habr.com/ru/company/ruvds/blog/500290/#comment_21592346" class="tm-comment-thread__comment-link">
+                09.05.2020 в 05:43
+                <!----></a></span></span></div> <div class="tm-comment__buttons"><button type="button" class="tm-comment__button tm-comment__button_with-icon"><svg height="16" width="16" class="tm-svg-img tm-comment__icon"><title>Показать предыдущий комментарий</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#small-arrow"></use></svg></button> <!----></div></header> <div class="tm-comment__body-content"><div xmlns="http://www.w3.org/1999/xhtml">Применение любого вида декорации подразумевает наличие у исполнителя как вкуса, так и меры. Запретительная часть обходится F12, смысл её нулевой</div></div> <!----> <!----></div> <div class="tm-comment-footer"><div class="tm-votes-meter tm-comment-footer__votes-meter"><svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-comment"><title>Комментарий пока не оценивали</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-rating"></use></svg> <span title="Комментарий пока не оценивали" class="tm-votes-meter__value tm-votes-meter__value_appearance-comment tm-votes-meter__value_rating">0</span></div> <button type="button" class="tm-comment-thread__button">
+                  Ответить
+                </button> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-comment-footer__button tm-comment-footer__button_with-icon"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon"><svg height="24" width="24" class="tm-svg-img tm-svg-icon"><title>Добавить в закладки</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-favorite"></use></svg></span> <!----></button> <button data-comment-popup="21592346" class="tm-comment__button tm-comment__button_with-icon"><svg height="16" width="16" class="tm-svg-img tm-comment__icon tm-comment__icon_dots"><title>Ещё</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#dots"></use></svg></button> <!----></div></div></article> <!----> <!----></section></div> <!----></section></div> <!----></section><section class="tm-comment-thread"><!----> <article class="tm-comment-thread__comment"><a name="comment_21582640" class="tm-comment-thread__target"></a> <button class="tm-comment-thread__breadcrumbs tm-comment-thread__indent_b_l-0"><div class="tm-comment-thread__circle"></div></button> <!----> <div data-comment-body="21582640" class="tm-comment-thread__indent_l-0"><div data-gallery-root="" class="tm-comment"><header data-comment-header="" tabindex="-1" class="tm-comment__header"><div class="tm-comment__header-inner"><span class="tm-user-info tm-comment__user-info"><a href="https://habr.com/ru/users/papabig/" class="tm-user-info__userpic" title="papabig"><div class="tm-entity-image"><svg height="24" width="24" class="tm-svg-img tm-image-placeholder tm-image-placeholder_blue"><!----> <use xlink:href="/img/megazord-v24.4a410f80.svg#placeholder-user"></use></svg></div></a> <span class="tm-user-info__user"><a href="https://habr.com/ru/users/papabig/" class="tm-user-info__username">
+      papabig
+    </a> <a href="https://habr.com/ru/company/ruvds/blog/500290/#comment_21582640" class="tm-comment-thread__comment-link">
+                06.05.2020 в 21:59
+                <!----></a></span></span></div> <div class="tm-comment__buttons"><!----> <!----></div></header> <div class="tm-comment__body-content"><div xmlns="http://www.w3.org/1999/xhtml">Еще бы выделение в хромиуме починили. Багует уже лет 10.</div></div> <!----> <!----></div> <div class="tm-comment-footer"><div class="tm-votes-meter tm-comment-footer__votes-meter"><svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-comment"><title>Комментарий пока не оценивали</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-rating"></use></svg> <span title="Комментарий пока не оценивали" class="tm-votes-meter__value tm-votes-meter__value_appearance-comment tm-votes-meter__value_rating">0</span></div> <button type="button" class="tm-comment-thread__button">
+                  Ответить
+                </button> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-comment-footer__button tm-comment-footer__button_with-icon"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon"><svg height="24" width="24" class="tm-svg-img tm-svg-icon"><title>Добавить в закладки</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-favorite"></use></svg></span> <!----></button> <button data-comment-popup="21582640" class="tm-comment__button tm-comment__button_with-icon"><svg height="16" width="16" class="tm-svg-img tm-comment__icon tm-comment__icon_dots"><title>Ещё</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#dots"></use></svg></button> <!----></div></div></article> <!----> <!----></section><section class="tm-comment-thread"><!----> <article class="tm-comment-thread__comment"><a name="comment_21606014" class="tm-comment-thread__target"></a> <button class="tm-comment-thread__breadcrumbs tm-comment-thread__indent_b_l-0"><div class="tm-comment-thread__circle"></div></button> <!----> <div data-comment-body="21606014" class="tm-comment-thread__indent_l-0"><div data-gallery-root="" class="tm-comment"><header data-comment-header="" tabindex="-1" class="tm-comment__header"><div class="tm-comment__header-inner"><span class="tm-user-info tm-comment__user-info"><a href="https://habr.com/ru/users/BarrBozzO/" class="tm-user-info__userpic" title="BarrBozzO"><div class="tm-entity-image"><svg height="24" width="24" class="tm-svg-img tm-image-placeholder tm-image-placeholder_green"><!----> <use xlink:href="/img/megazord-v24.4a410f80.svg#placeholder-user"></use></svg></div></a> <span class="tm-user-info__user"><a href="https://habr.com/ru/users/BarrBozzO/" class="tm-user-info__username">
+      BarrBozzO
+    </a> <a href="https://habr.com/ru/company/ruvds/blog/500290/#comment_21606014" class="tm-comment-thread__comment-link">
+                12.05.2020 в 18:40
+                <!----></a></span></span></div> <div class="tm-comment__buttons"><!----> <!----></div></header> <div class="tm-comment__body-content"><div xmlns="http://www.w3.org/1999/xhtml">Примеры хорошие. Определенная польза от статьи есть. Спасибо</div></div> <!----> <!----></div> <div class="tm-comment-footer"><div class="tm-votes-meter tm-comment-footer__votes-meter"><svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-comment"><title>Комментарий пока не оценивали</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-rating"></use></svg> <span title="Комментарий пока не оценивали" class="tm-votes-meter__value tm-votes-meter__value_appearance-comment tm-votes-meter__value_rating">0</span></div> <button type="button" class="tm-comment-thread__button">
+                  Ответить
+                </button> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-comment-footer__button tm-comment-footer__button_with-icon"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon"><svg height="24" width="24" class="tm-svg-img tm-svg-icon"><title>Добавить в закладки</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-favorite"></use></svg></span> <!----></button> <button data-comment-popup="21606014" class="tm-comment__button tm-comment__button_with-icon"><svg height="16" width="16" class="tm-svg-img tm-comment__icon tm-comment__icon_dots"><title>Ещё</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#dots"></use></svg></button> <!----></div></div></article> <!----> <!----></section><section class="tm-comment-thread"><!----> <article class="tm-comment-thread__comment"><a name="comment_21609164" class="tm-comment-thread__target"></a> <button class="tm-comment-thread__breadcrumbs tm-comment-thread__indent_b_l-0"><div class="tm-comment-thread__circle"></div></button> <!----> <div data-comment-body="21609164" class="tm-comment-thread__indent_l-0"><div data-gallery-root="" class="tm-comment"><header data-comment-header="" tabindex="-1" class="tm-comment__header"><div class="tm-comment__header-inner"><span class="tm-user-info tm-comment__user-info"><a href="https://habr.com/ru/users/gluck59/" class="tm-user-info__userpic" title="gluck59"><div class="tm-entity-image"><img alt="" height="24" src="./Выделение и CSS _ Хабр_files/d3f5737030ed034faae9c50644cfc734.gif" width="24" class="tm-entity-image__pic"></div></a> <span class="tm-user-info__user"><a href="https://habr.com/ru/users/gluck59/" class="tm-user-info__username">
+      gluck59
+    </a> <a href="https://habr.com/ru/company/ruvds/blog/500290/#comment_21609164" class="tm-comment-thread__comment-link">
+                13.05.2020 в 12:17
+                <!----></a></span></span></div> <div class="tm-comment__buttons"><!----> <!----></div></header> <div class="tm-comment__body-content"><div xmlns="http://www.w3.org/1999/xhtml"><p>Мой сайт использует кастомное выделение примерно с 2011.<br>
+Потом, став старше (и надеюсь умнее), я убрал извращения, оставив только фон выделения в соответствии с дизайном сайта. </p><br>
+<p>Пожалуйста не мешайте пользователям! Подобные советы могут отпугнуть их навсегда. </p></div></div> <!----> <!----></div> <div class="tm-comment-footer"><div class="tm-votes-meter tm-comment-footer__votes-meter"><svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-comment"><title>Комментарий пока не оценивали</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-rating"></use></svg> <span title="Комментарий пока не оценивали" class="tm-votes-meter__value tm-votes-meter__value_appearance-comment tm-votes-meter__value_rating">0</span></div> <button type="button" class="tm-comment-thread__button">
+                  Ответить
+                </button> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-comment-footer__button tm-comment-footer__button_with-icon"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon"><svg height="24" width="24" class="tm-svg-img tm-svg-icon"><title>Добавить в закладки</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-favorite"></use></svg></span> <!----></button> <button data-comment-popup="21609164" class="tm-comment__button tm-comment__button_with-icon"><svg height="16" width="16" class="tm-svg-img tm-comment__icon tm-comment__icon_dots"><title>Ещё</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#dots"></use></svg></button> <!----></div></div></article> <!----> <!----></section></div> </div></div> <div class="tm-notice tm-comments__comment-notice tm-notice_positive"><!----> <div class="tm-notice__inner"><!----> <div class="tm-notice__content"><span>Только полноправные пользователи могут оставлять комментарии. <a rel="nofollow" href="https://habr.com/kek/v1/auth/habrahabr/?back=/ru/company/ruvds/blog/500290/&amp;hl=ru">Войдите</a>, пожалуйста.</span></div></div></div></div></div></div></div></div>  <section class="tm-block tm-block_spacing-around"><header class="tm-block__header"><h2 class="tm-block__title">Похожие публикации</h2> <!----></header> <div class="tm-block__body"><ul class="tm-article-list-block__list"><li class="tm-article-list-block__item"><article class="tm-article-snippet-block-block tm-article-snippet-block-block_preview"><div class="tm-article-snippet-block__user-meta"><div class="tm-article-snippet-block__date"><time datetime="2021-01-11T09:29:35.000Z" title="2021-01-11, 13:29">11  января   в 13:29</time></div></div> <h2 class="tm-article-title tm-article-title_block"><a href="https://habr.com/ru/company/ruvds/blog/534106/" class="tm-article-title__link"><span>Практика использования спецификации CSS Scroll Snap</span></a></h2> <div class="tm-data-icons"><!----> <div class="tm-votes-meter tm-data-icons__item"><svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-article"><title>Всего голосов 39: ↑39 и ↓0</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-rating"></use></svg> <span title="Всего голосов 39: ↑39 и ↓0" class="tm-votes-meter__value tm-votes-meter__value_positive tm-votes-meter__value_appearance-article tm-votes-meter__value_rating">+39</span></div> <span class="tm-icon-counter tm-data-icons__item" title="Количество просмотров"><svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon"><title>Просмотры</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-views"></use></svg> <span class="tm-icon-counter__value">17K</span></span> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-data-icons__item"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon"><svg height="24" width="24" class="tm-svg-img tm-svg-icon"><title>Добавить в закладки</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-favorite"></use></svg></span> <span title="Количество пользователей, добавивших публикацию в закладки" class="bookmarks-button__counter">
+    139
+  </span></button> <div class="tm-article-comments-counter-link tm-data-icons__item" title="Читать комментарии"><a href="https://habr.com/ru/company/ruvds/blog/534106/comments/" class="tm-article-comments-counter-link__link"><svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon"><title>Комментарии</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-comments"></use></svg> <span class="tm-article-comments-counter-link__value">
+      6
+    </span></a> <a href="https://habr.com/ru/company/ruvds/blog/534106/comments/" class="tm-article-comments-counter-link__link"><span title="Читать новые комментарии" class="tm-article-comments-counter-link__unread-counter">
+      +6
+    </span></a></div> <!----> <div class="v-portal" style="display: none;"></div></div></article></li><li class="tm-article-list-block__item"><article class="tm-article-snippet-block-block tm-article-snippet-block-block_preview"><div class="tm-article-snippet-block__user-meta"><div class="tm-article-snippet-block__date"><time datetime="2020-08-08T13:16:01.000Z" title="2020-08-08, 17:16">8  августа  2020 в 17:16</time></div></div> <h2 class="tm-article-title tm-article-title_block"><a href="https://habr.com/ru/company/ruvds/blog/513768/" class="tm-article-title__link"><span>6 мощных возможностей CSS, которые позволяют обойтись без JavaScript</span></a></h2> <div class="tm-data-icons"><!----> <div class="tm-votes-meter tm-data-icons__item"><svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-article"><title>Всего голосов 51: ↑45 и ↓6</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-rating"></use></svg> <span title="Всего голосов 51: ↑45 и ↓6" class="tm-votes-meter__value tm-votes-meter__value_positive tm-votes-meter__value_appearance-article tm-votes-meter__value_rating">+39</span></div> <span class="tm-icon-counter tm-data-icons__item" title="Количество просмотров"><svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon"><title>Просмотры</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-views"></use></svg> <span class="tm-icon-counter__value">38K</span></span> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-data-icons__item"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon"><svg height="24" width="24" class="tm-svg-img tm-svg-icon"><title>Добавить в закладки</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-favorite"></use></svg></span> <span title="Количество пользователей, добавивших публикацию в закладки" class="bookmarks-button__counter">
+    320
+  </span></button> <div class="tm-article-comments-counter-link tm-data-icons__item" title="Читать комментарии"><a href="https://habr.com/ru/company/ruvds/blog/513768/comments/" class="tm-article-comments-counter-link__link"><svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon"><title>Комментарии</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-comments"></use></svg> <span class="tm-article-comments-counter-link__value">
+      58
+    </span></a> <a href="https://habr.com/ru/company/ruvds/blog/513768/comments/" class="tm-article-comments-counter-link__link"><span title="Читать новые комментарии" class="tm-article-comments-counter-link__unread-counter">
+      +58
+    </span></a></div> <!----> <div class="v-portal" style="display: none;"></div></div></article></li><li class="tm-article-list-block__item"><article class="tm-article-snippet-block-block tm-article-snippet-block-block_preview"><div class="tm-article-snippet-block__user-meta"><div class="tm-article-snippet-block__date"><time datetime="2018-08-02T08:37:10.000Z" title="2018-08-02, 12:37">2  августа  2018 в 12:37</time></div></div> <h2 class="tm-article-title tm-article-title_block"><a href="https://habr.com/ru/company/ruvds/blog/418825/" class="tm-article-title__link"><span>Методики и инструменты для разработки стилей веб-страниц</span></a></h2> <div class="tm-data-icons"><!----> <div class="tm-votes-meter tm-data-icons__item"><svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-article"><title>Всего голосов 23: ↑23 и ↓0</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-rating"></use></svg> <span title="Всего голосов 23: ↑23 и ↓0" class="tm-votes-meter__value tm-votes-meter__value_positive tm-votes-meter__value_appearance-article tm-votes-meter__value_rating">+23</span></div> <span class="tm-icon-counter tm-data-icons__item" title="Количество просмотров"><svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon"><title>Просмотры</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-views"></use></svg> <span class="tm-icon-counter__value">20K</span></span> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-data-icons__item"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon"><svg height="24" width="24" class="tm-svg-img tm-svg-icon"><title>Добавить в закладки</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-favorite"></use></svg></span> <span title="Количество пользователей, добавивших публикацию в закладки" class="bookmarks-button__counter">
+    194
+  </span></button> <div class="tm-article-comments-counter-link tm-data-icons__item" title="Читать комментарии"><a href="https://habr.com/ru/company/ruvds/blog/418825/comments/" class="tm-article-comments-counter-link__link"><svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon"><title>Комментарии</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-comments"></use></svg> <span class="tm-article-comments-counter-link__value">
+      13
+    </span></a> <a href="https://habr.com/ru/company/ruvds/blog/418825/comments/" class="tm-article-comments-counter-link__link"><span title="Читать новые комментарии" class="tm-article-comments-counter-link__unread-counter">
+      +13
+    </span></a></div> <!----> <div class="v-portal" style="display: none;"></div></div></article></li> <!----></ul></div> <!----></section>  <section class="tm-block tm-block_spacing-around"><header class="tm-block__header"><h2 class="tm-block__title">Лучшие публикации за сутки</h2> <!----></header> <div class="tm-block__body"><ul class="tm-article-list-block__list"><li class="tm-article-list-block__item"><article class="tm-article-snippet-block-block tm-article-snippet-block-block_preview"><div class="tm-article-snippet-block__user-meta"><div class="tm-article-snippet-block__date"><time datetime="2021-12-07T19:40:53.000Z" title="2021-12-07, 23:40">вчера в 23:40</time></div></div> <h2 class="tm-article-title tm-article-title_block"><a href="https://habr.com/ru/post/594043/" class="tm-article-title__link"><span>Интерактивная карта развития Московского метрополитена</span></a></h2> <div class="tm-data-icons"><!----> <div class="tm-votes-meter tm-data-icons__item"><svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-article"><title>Всего голосов 45: ↑45 и ↓0</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-rating"></use></svg> <span title="Всего голосов 45: ↑45 и ↓0" class="tm-votes-meter__value tm-votes-meter__value_positive tm-votes-meter__value_appearance-article tm-votes-meter__value_rating">+45</span></div> <span class="tm-icon-counter tm-data-icons__item" title="Количество просмотров"><svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon"><title>Просмотры</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-views"></use></svg> <span class="tm-icon-counter__value">8.7K</span></span> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-data-icons__item"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon"><svg height="24" width="24" class="tm-svg-img tm-svg-icon"><title>Добавить в закладки</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-favorite"></use></svg></span> <span title="Количество пользователей, добавивших публикацию в закладки" class="bookmarks-button__counter">
+    33
+  </span></button> <div class="tm-article-comments-counter-link tm-data-icons__item" title="Читать комментарии"><a href="https://habr.com/ru/post/594043/comments/" class="tm-article-comments-counter-link__link"><svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon"><title>Комментарии</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-comments"></use></svg> <span class="tm-article-comments-counter-link__value">
+      20
+    </span></a> <a href="https://habr.com/ru/post/594043/comments/" class="tm-article-comments-counter-link__link"><span title="Читать новые комментарии" class="tm-article-comments-counter-link__unread-counter">
+      +20
+    </span></a></div> <!----> <div class="v-portal" style="display: none;"></div></div></article></li><li class="tm-article-list-block__item"><article class="tm-article-snippet-block-block tm-article-snippet-block-block_preview"><div class="tm-article-snippet-block__user-meta"><div class="tm-article-snippet-block__date"><time datetime="2021-12-07T20:28:49.000Z" title="2021-12-08, 00:28">сегодня в 00:28</time></div></div> <h2 class="tm-article-title tm-article-title_block"><a href="https://habr.com/ru/company/skillfactory/blog/593999/" class="tm-article-title__link"><span>Как я пишу на LaTeX в Emacs быстрее, чем от руки</span></a></h2> <div class="tm-data-icons"><!----> <div class="tm-votes-meter tm-data-icons__item"><svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-article"><title>Всего голосов 43: ↑42 и ↓1</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-rating"></use></svg> <span title="Всего голосов 43: ↑42 и ↓1" class="tm-votes-meter__value tm-votes-meter__value_positive tm-votes-meter__value_appearance-article tm-votes-meter__value_rating">+41</span></div> <span class="tm-icon-counter tm-data-icons__item" title="Количество просмотров"><svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon"><title>Просмотры</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-views"></use></svg> <span class="tm-icon-counter__value">8.7K</span></span> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-data-icons__item"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon"><svg height="24" width="24" class="tm-svg-img tm-svg-icon"><title>Добавить в закладки</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-favorite"></use></svg></span> <span title="Количество пользователей, добавивших публикацию в закладки" class="bookmarks-button__counter">
+    61
+  </span></button> <div class="tm-article-comments-counter-link tm-data-icons__item" title="Читать комментарии"><a href="https://habr.com/ru/company/skillfactory/blog/593999/comments/" class="tm-article-comments-counter-link__link"><svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon"><title>Комментарии</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-comments"></use></svg> <span class="tm-article-comments-counter-link__value">
+      7
+    </span></a> <a href="https://habr.com/ru/company/skillfactory/blog/593999/comments/" class="tm-article-comments-counter-link__link"><span title="Читать новые комментарии" class="tm-article-comments-counter-link__unread-counter">
+      +7
+    </span></a></div> <!----> <div class="v-portal" style="display: none;"></div></div></article></li><li class="tm-article-list-block__item"><article class="tm-article-snippet-block-block tm-article-snippet-block-block_preview"><div class="tm-article-snippet-block__user-meta"><div class="tm-article-snippet-block__date"><time datetime="2021-12-08T08:06:40.000Z" title="2021-12-08, 12:06">сегодня в 12:06</time></div></div> <h2 class="tm-article-title tm-article-title_block"><a href="https://habr.com/ru/company/yandex/blog/593681/" class="tm-article-title__link"><span>Шёпот и эмоции в Алисе: история развития голосового синтеза Яндекса</span></a></h2> <div class="tm-data-icons"><!----> <div class="tm-votes-meter tm-data-icons__item"><svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-article"><title>Всего голосов 43: ↑40 и ↓3</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-rating"></use></svg> <span title="Всего голосов 43: ↑40 и ↓3" class="tm-votes-meter__value tm-votes-meter__value_positive tm-votes-meter__value_appearance-article tm-votes-meter__value_rating">+37</span></div> <span class="tm-icon-counter tm-data-icons__item" title="Количество просмотров"><svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon"><title>Просмотры</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-views"></use></svg> <span class="tm-icon-counter__value">2.7K</span></span> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-data-icons__item"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon"><svg height="24" width="24" class="tm-svg-img tm-svg-icon"><title>Добавить в закладки</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-favorite"></use></svg></span> <span title="Количество пользователей, добавивших публикацию в закладки" class="bookmarks-button__counter">
+    11
+  </span></button> <div class="tm-article-comments-counter-link tm-data-icons__item" title="Читать комментарии"><a href="https://habr.com/ru/company/yandex/blog/593681/comments/" class="tm-article-comments-counter-link__link"><svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon"><title>Комментарии</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-comments"></use></svg> <span class="tm-article-comments-counter-link__value">
+      9
+    </span></a> <a href="https://habr.com/ru/company/yandex/blog/593681/comments/" class="tm-article-comments-counter-link__link"><span title="Читать новые комментарии" class="tm-article-comments-counter-link__unread-counter">
+      +9
+    </span></a></div> <!----> <div class="v-portal" style="display: none;"></div></div></article></li><li class="tm-article-list-block__item"><article class="tm-article-snippet-block-block tm-article-snippet-block-block_preview"><div class="tm-article-snippet-block__user-meta"><div class="tm-article-snippet-block__date"><time datetime="2021-12-08T05:38:22.000Z" title="2021-12-08, 09:38">сегодня в 09:38</time></div></div> <h2 class="tm-article-title tm-article-title_block"><a href="https://habr.com/ru/company/tensor/blog/593607/" class="tm-article-title__link"><span>Как мы переходили на Node.JS v16, или История о сломанном GC</span></a></h2> <div class="tm-data-icons"><!----> <div class="tm-votes-meter tm-data-icons__item"><svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-article"><title>Всего голосов 33: ↑33 и ↓0</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-rating"></use></svg> <span title="Всего голосов 33: ↑33 и ↓0" class="tm-votes-meter__value tm-votes-meter__value_positive tm-votes-meter__value_appearance-article tm-votes-meter__value_rating">+33</span></div> <span class="tm-icon-counter tm-data-icons__item" title="Количество просмотров"><svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon"><title>Просмотры</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-views"></use></svg> <span class="tm-icon-counter__value">1.8K</span></span> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-data-icons__item"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon"><svg height="24" width="24" class="tm-svg-img tm-svg-icon"><title>Добавить в закладки</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-favorite"></use></svg></span> <span title="Количество пользователей, добавивших публикацию в закладки" class="bookmarks-button__counter">
+    16
+  </span></button> <div class="tm-article-comments-counter-link tm-data-icons__item" title="Читать комментарии"><a href="https://habr.com/ru/company/tensor/blog/593607/comments/" class="tm-article-comments-counter-link__link"><svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon"><title>Комментарии</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-comments"></use></svg> <span class="tm-article-comments-counter-link__value">
+      2
+    </span></a> <a href="https://habr.com/ru/company/tensor/blog/593607/comments/" class="tm-article-comments-counter-link__link"><span title="Читать новые комментарии" class="tm-article-comments-counter-link__unread-counter">
+      +2
+    </span></a></div> <!----> <div class="v-portal" style="display: none;"></div></div></article></li><li class="tm-article-list-block__item"><article class="tm-article-snippet-block-block tm-article-snippet-block-block_preview"><div class="tm-article-snippet-block__user-meta"><div class="tm-article-snippet-block__date"><time datetime="2021-12-07T17:31:59.000Z" title="2021-12-07, 21:31">вчера в 21:31</time></div></div> <h2 class="tm-article-title tm-article-title_block"><a href="https://habr.com/ru/post/594031/" class="tm-article-title__link"><span>Тайна древнеегипетской мумии</span></a></h2> <div class="tm-data-icons"><!----> <div class="tm-votes-meter tm-data-icons__item"><svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-article"><title>Всего голосов 35: ↑34 и ↓1</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-rating"></use></svg> <span title="Всего голосов 35: ↑34 и ↓1" class="tm-votes-meter__value tm-votes-meter__value_positive tm-votes-meter__value_appearance-article tm-votes-meter__value_rating">+33</span></div> <span class="tm-icon-counter tm-data-icons__item" title="Количество просмотров"><svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon"><title>Просмотры</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-views"></use></svg> <span class="tm-icon-counter__value">6.2K</span></span> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-data-icons__item"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon"><svg height="24" width="24" class="tm-svg-img tm-svg-icon"><title>Добавить в закладки</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-favorite"></use></svg></span> <span title="Количество пользователей, добавивших публикацию в закладки" class="bookmarks-button__counter">
+    18
+  </span></button> <div class="tm-article-comments-counter-link tm-data-icons__item" title="Читать комментарии"><a href="https://habr.com/ru/post/594031/comments/" class="tm-article-comments-counter-link__link"><svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon"><title>Комментарии</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-comments"></use></svg> <span class="tm-article-comments-counter-link__value">
+      6
+    </span></a> <a href="https://habr.com/ru/post/594031/comments/" class="tm-article-comments-counter-link__link"><span title="Читать новые комментарии" class="tm-article-comments-counter-link__unread-counter">
+      +6
+    </span></a></div> <!----> <div class="v-portal" style="display: none;"></div></div></article></li> <!----></ul></div> <!----></section> <!----></div></div></div></div></div> <div class="tm-page__sidebar"><div class="tm-layout-sidebar"><div class="tm-layout-sidebar__placeholder_margin"></div> <div class="tm-sexy-sidebar tm-sexy-sidebar_margin" style="margin-top: 13525px;"><!----> <section class="tm-block tm-block_spacing-bottom"><header class="tm-block__header"><h2 class="tm-block__title">Информация</h2> <!----></header> <div class="tm-block__body"><div class="tm-company-basic-info"><dl class="tm-description-list tm-description-list_variant-columns-nowrap"><dt class="tm-description-list__title tm-description-list__title_variant-columns-nowrap">Дата основания</dt> <dd class="tm-description-list__body tm-description-list__body_variant-columns-nowrap"><time datetime="2015-07-26T21:00:00.000Z" title="2015-07-27, 00:00">27  июля  2015</time></dd></dl> <dl class="tm-description-list tm-description-list_variant-columns-nowrap"><dt class="tm-description-list__title tm-description-list__title_variant-columns-nowrap">Местоположение</dt> <dd class="tm-description-list__body tm-description-list__body_variant-columns-nowrap">
+    Россия
+  </dd></dl> <dl class="tm-description-list tm-description-list_variant-columns-nowrap"><dt class="tm-description-list__title tm-description-list__title_variant-columns-nowrap">Сайт</dt> <dd class="tm-description-list__body tm-description-list__body_variant-columns-nowrap"><a href="https://ruvds.com/" target="_blank" class="tm-company-basic-info__link">
+      ruvds.com
+    </a></dd></dl> <dl class="tm-description-list tm-description-list_variant-columns-nowrap"><dt class="tm-description-list__title tm-description-list__title_variant-columns-nowrap">Численность</dt> <dd class="tm-description-list__body tm-description-list__body_variant-columns-nowrap">
+    11–30 человек
+  </dd></dl> <dl class="tm-description-list tm-description-list_variant-columns-nowrap"><dt class="tm-description-list__title tm-description-list__title_variant-columns-nowrap">Дата регистрации</dt> <dd class="tm-description-list__body tm-description-list__body_variant-columns-nowrap"><time datetime="2016-03-18T05:43:01.000Z" title="2016-03-18, 08:43">18  марта  2016</time></dd></dl> <dl class="tm-description-list tm-description-list_variant-columns-nowrap"><dt class="tm-description-list__title tm-description-list__title_variant-columns-nowrap">Представитель</dt> <dd class="tm-description-list__body tm-description-list__body_variant-columns-nowrap"><a href="https://habr.com/ru/users/ruvds/" class="tm-company-basic-info__link">
+      ruvds
+    </a></dd></dl></div></div> <!----></section> <div class="tm-company-widgets"><section class="tm-block tm-block_spacing-bottom" type="links"><header class="tm-block__header"><h2 class="tm-block__title">Ссылки</h2> <!----></header> <div class="tm-block__body"><ul class="tm-widget-links__list"><li class="tm-widget-links__item"><a href="https://ruvds.com/vps_start" rel="nofollow noreferrer" target="_blank" class="tm-widget-links__link">VPS / VDS сервер от 130 рублей в месяц.</a> <small class="tm-widget-links__host">ruvds.com</small></li><li class="tm-widget-links__item"><a href="https://ruvds.com/ru-rub/data" rel="nofollow noreferrer" target="_blank" class="tm-widget-links__link">Дата-центры RUVDS в Москве, Санкт-Петербурге, Казани, Екатеринбурге, Новосибирске, Лондоне, Франкфурте, Цюрихе, Амстердаме</a> <small class="tm-widget-links__host">ruvds.com</small></li><li class="tm-widget-links__item"><a href="https://ruvds.com/ru-rub/faq" rel="nofollow noreferrer" target="_blank" class="tm-widget-links__link">Помощь и вопросы</a> <small class="tm-widget-links__host">ruvds.com</small></li><li class="tm-widget-links__item"><a href="https://ruvds.com/ru-rub/partner" rel="nofollow noreferrer" target="_blank" class="tm-widget-links__link">Партнерская программа RUVDS</a> <small class="tm-widget-links__host">ruvds.com</small></li><li class="tm-widget-links__item"><a href="https://ruvds.com/vps_start" rel="nofollow noreferrer" target="_blank" class="tm-widget-links__link">VPS (CPU 1x2ГГц, RAM 512Mb, SSD 10 Gb) — 190 рублей в месяц</a> <small class="tm-widget-links__host">ruvds.com</small></li><li class="tm-widget-links__item"><a href="https://ruvds.com/ru-rub/" rel="nofollow noreferrer" target="_blank" class="tm-widget-links__link">VPS Windows от 307 рублей в месяц. Бесплатный тестовый период 3 дня.</a> <small class="tm-widget-links__host">ruvds.com</small></li><li class="tm-widget-links__item"><a href="https://ruvds.com/ru-rub/data/zur1" rel="nofollow noreferrer" target="_blank" class="tm-widget-links__link">VDS в Цюрихе. Дата-центр TIER III — швейцарское качество по низкой цене.</a> <small class="tm-widget-links__host">ruvds.com</small></li><li class="tm-widget-links__item"><a href="https://ruvds.com/ru-rub/kaspersky" rel="nofollow noreferrer" target="_blank" class="tm-widget-links__link">Антивирусная защита виртуального сервера. Легкий агент для VPS.</a> <small class="tm-widget-links__host">ruvds.com</small></li><li class="tm-widget-links__item"><a href="https://ruvds.com/ru-rub/data/eng" rel="nofollow noreferrer" target="_blank" class="tm-widget-links__link">VPS в Лондоне. Дата-центр TIER III — английская точность за рубли.</a> <small class="tm-widget-links__host">ruvds.com</small></li><li class="tm-widget-links__item"><a href="https://ruvds.com/ru-rub/" rel="nofollow noreferrer" target="_blank" class="tm-widget-links__link">VPS с видеокартой на мощных серверах 3,4ГГц</a> <small class="tm-widget-links__host">ruvds.com</small></li></ul></div> <!----></section><section class="tm-block tm-block_spacing-bottom" type="applications"><header class="tm-block__header"><h2 class="tm-block__title">Приложения</h2> <!----></header> <div class="tm-block__body"><ul class="tm-widget-applications__list"><li class="tm-widget-applications__item"><article class="tm-widget-applications__card"><aside class="tm-widget-applications__aside"><img alt="" src="./Выделение и CSS _ Хабр_files/6ee74bd87dbf84e43cdcc0abd0d13a3f.png" class="tm-widget-applications__image"></aside> <div class="tm-widget-applications__body"><h3 class="tm-widget-applications__card-title">RUVDS Client</h3> <p class="tm-widget-applications__card-description">Приложение для мониторинга и управления виртуальными серверами RUVDS с мобильных устройств.</p> <ul class="tm-widget-applications__card-links"><li class="tm-widget-applications__card-link-item"><a href="https://play.google.com/store/apps/details?id=com.rudvs.ruvdsclient" rel="nofollow noreferrer" target="_blank" class="tm-widget-applications__card-link">Android</a></li><li class="tm-widget-applications__card-link-item"><a href="https://apps.apple.com/ru/app/ruvds-client/id1492272255?ign-mpt=uo%3D4" rel="nofollow noreferrer" target="_blank" class="tm-widget-applications__card-link">iOS</a></li></ul></div></article></li></ul></div> <!----></section><section class="tm-block tm-block_spacing-bottom" type="banner"><header class="tm-block__header tm-block__header_variant-borderless"><h2 class="tm-block__title">Виджет</h2> <!----></header> <div class="tm-block__body"><a href="https://ruvds.com/ru-rub/news/read/151" class="tm-widget-banner__image-wrapper"><img alt="" src="./Выделение и CSS _ Хабр_files/0057c9957b6a36fa085a0a208e100b71.png" class="tm-widget-banner__image"></a> <!----></div> <!----></section><section class="tm-block tm-block_spacing-bottom" type="banner"><header class="tm-block__header tm-block__header_variant-borderless"><h2 class="tm-block__title">Виджет</h2> <!----></header> <div class="tm-block__body"><a href="https://bit.ly/30z0Qws" class="tm-widget-banner__image-wrapper"><img alt="" src="./Выделение и CSS _ Хабр_files/9adddb757988b632d13dfe0916c920da.png" class="tm-widget-banner__image"></a> <!----></div> <!----></section><section class="tm-block tm-block_spacing-bottom" type="banner"><header class="tm-block__header tm-block__header_variant-borderless"><h2 class="tm-block__title">Виджет</h2> <!----></header> <div class="tm-block__body"><a href="https://ruvds.com/ru-rub/" class="tm-widget-banner__image-wrapper"><img alt="" src="./Выделение и CSS _ Хабр_files/e1228e7f11865e9e73aeeb89a805f1f2.jpg" class="tm-widget-banner__image"></a> <!----></div> <!----></section></div> <section class="tm-block tm-block_spacing-around"><header class="tm-block__header"><h2 class="tm-block__title">Блог на Хабре</h2> <!----></header> <div class="tm-block__body"><ul class="tm-article-list-block__list"><li class="tm-article-list-block__item"><article class="tm-article-snippet-block-sidebar tm-article-snippet-block-sidebar_preview"><div class="tm-article-snippet-block__user-meta"><div class="tm-article-snippet-block__date"><time datetime="2021-12-08T13:00:04.000Z" title="2021-12-08, 17:00">сегодня в 17:00</time></div></div> <h2 class="tm-article-title tm-article-title_sidebar"><a href="https://habr.com/ru/company/ruvds/blog/594115/" class="tm-article-title__link"><span>Как работают коды Spotify?</span></a></h2> <div class="tm-data-icons"><!----> <!----> <span class="tm-icon-counter tm-data-icons__item" title="Количество просмотров"><svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon"><title>Просмотры</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-views"></use></svg> <span class="tm-icon-counter__value">786</span></span> <!----> <div class="tm-article-comments-counter-link tm-data-icons__item" title="Читать комментарии"><a href="https://habr.com/ru/company/ruvds/blog/594115/comments/" class="tm-article-comments-counter-link__link"><svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon"><title>Комментарии</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-comments"></use></svg> <span class="tm-article-comments-counter-link__value">
+      2
+    </span></a> <a href="https://habr.com/ru/company/ruvds/blog/594115/comments/" class="tm-article-comments-counter-link__link"><span title="Читать новые комментарии" class="tm-article-comments-counter-link__unread-counter">
+      +2
+    </span></a></div> <!----> <div class="v-portal" style="display: none;"></div></div></article></li><li class="tm-article-list-block__item"><article class="tm-article-snippet-block-sidebar tm-article-snippet-block-sidebar_preview"><div class="tm-article-snippet-block__user-meta"><div class="tm-article-snippet-block__date"><time datetime="2021-12-08T09:00:02.000Z" title="2021-12-08, 13:00">сегодня в 13:00</time></div></div> <h2 class="tm-article-title tm-article-title_sidebar"><a href="https://habr.com/ru/company/ruvds/blog/591291/" class="tm-article-title__link"><span>Как разработать микросхему, от идеи до результата. Часть 2. Установка программного обеспечения</span></a></h2> <div class="tm-data-icons"><!----> <!----> <span class="tm-icon-counter tm-data-icons__item" title="Количество просмотров"><svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon"><title>Просмотры</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-views"></use></svg> <span class="tm-icon-counter__value">1.2K</span></span> <!----> <div class="tm-article-comments-counter-link tm-data-icons__item" title="Читать комментарии"><a href="https://habr.com/ru/company/ruvds/blog/591291/comments/" class="tm-article-comments-counter-link__link"><svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon"><title>Комментарии</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-comments"></use></svg> <span class="tm-article-comments-counter-link__value">
+      1
+    </span></a> <a href="https://habr.com/ru/company/ruvds/blog/591291/comments/" class="tm-article-comments-counter-link__link"><span title="Читать новые комментарии" class="tm-article-comments-counter-link__unread-counter">
+      +1
+    </span></a></div> <!----> <div class="v-portal" style="display: none;"></div></div></article></li><li class="tm-article-list-block__item"><article class="tm-article-snippet-block-sidebar tm-article-snippet-block-sidebar_preview"><div class="tm-article-snippet-block__user-meta"><div class="tm-article-snippet-block__date"><time datetime="2021-12-07T13:00:01.000Z" title="2021-12-07, 17:00">вчера в 17:00</time></div></div> <h2 class="tm-article-title tm-article-title_sidebar"><a href="https://habr.com/ru/company/ruvds/blog/593879/" class="tm-article-title__link"><span>Как и чем живёт современный Токио</span></a></h2> <div class="tm-data-icons"><!----> <!----> <span class="tm-icon-counter tm-data-icons__item" title="Количество просмотров"><svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon"><title>Просмотры</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-views"></use></svg> <span class="tm-icon-counter__value">9.9K</span></span> <!----> <div class="tm-article-comments-counter-link tm-data-icons__item" title="Читать комментарии"><a href="https://habr.com/ru/company/ruvds/blog/593879/comments/" class="tm-article-comments-counter-link__link"><svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon"><title>Комментарии</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-comments"></use></svg> <span class="tm-article-comments-counter-link__value">
+      14
+    </span></a> <a href="https://habr.com/ru/company/ruvds/blog/593879/comments/" class="tm-article-comments-counter-link__link"><span title="Читать новые комментарии" class="tm-article-comments-counter-link__unread-counter">
+      +14
+    </span></a></div> <!----> <div class="v-portal" style="display: none;"></div></div></article></li><li class="tm-article-list-block__item"><article class="tm-article-snippet-block-sidebar tm-article-snippet-block-sidebar_preview"><div class="tm-article-snippet-block__user-meta"><div class="tm-article-snippet-block__date"><time datetime="2021-12-07T09:00:03.000Z" title="2021-12-07, 13:00">вчера в 13:00</time></div></div> <h2 class="tm-article-title tm-article-title_sidebar"><a href="https://habr.com/ru/company/ruvds/blog/591275/" class="tm-article-title__link"><span>Как разработать микросхему, от идеи до результата. Часть 1. Теория</span></a></h2> <div class="tm-data-icons"><!----> <!----> <span class="tm-icon-counter tm-data-icons__item" title="Количество просмотров"><svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon"><title>Просмотры</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-views"></use></svg> <span class="tm-icon-counter__value">5.7K</span></span> <!----> <div class="tm-article-comments-counter-link tm-data-icons__item" title="Читать комментарии"><a href="https://habr.com/ru/company/ruvds/blog/591275/comments/" class="tm-article-comments-counter-link__link"><svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon"><title>Комментарии</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-comments"></use></svg> <span class="tm-article-comments-counter-link__value">
+      13
+    </span></a> <a href="https://habr.com/ru/company/ruvds/blog/591275/comments/" class="tm-article-comments-counter-link__link"><span title="Читать новые комментарии" class="tm-article-comments-counter-link__unread-counter">
+      +13
+    </span></a></div> <!----> <div class="v-portal" style="display: none;"></div></div></article></li><li class="tm-article-list-block__item"><article class="tm-article-snippet-block-sidebar tm-article-snippet-block-sidebar_preview"><div class="tm-article-snippet-block__user-meta"><div class="tm-article-snippet-block__date"><time datetime="2021-12-06T13:00:02.000Z" title="2021-12-06, 17:00">6  декабря   в 17:00</time></div></div> <h2 class="tm-article-title tm-article-title_sidebar"><a href="https://habr.com/ru/company/ruvds/blog/593199/" class="tm-article-title__link"><span>История славянских шипящих: почему мы пишем жи-ши через И?</span></a></h2> <div class="tm-data-icons"><!----> <!----> <span class="tm-icon-counter tm-data-icons__item" title="Количество просмотров"><svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon"><title>Просмотры</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-views"></use></svg> <span class="tm-icon-counter__value">26K</span></span> <!----> <div class="tm-article-comments-counter-link tm-data-icons__item" title="Читать комментарии"><a href="https://habr.com/ru/company/ruvds/blog/593199/comments/" class="tm-article-comments-counter-link__link"><svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon"><title>Комментарии</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-comments"></use></svg> <span class="tm-article-comments-counter-link__value">
+      190
+    </span></a> <a href="https://habr.com/ru/company/ruvds/blog/593199/comments/" class="tm-article-comments-counter-link__link"><span title="Читать новые комментарии" class="tm-article-comments-counter-link__unread-counter">
+      +190
+    </span></a></div> <!----> <div class="v-portal" style="display: none;"></div></div></article></li> <!----></ul></div> <!----></section></div></div></div></div></div></div></main> <!----></div> <div class="tm-footer-menu"><div class="tm-page-width"><div class="tm-footer-menu__container"><div class="tm-footer-menu__block"><h3 class="tm-footer-menu__block-title">
+          Ваш аккаунт
+        </h3> <div class="tm-footer-menu__block-content"><ul class="tm-footer-menu__list"><li class="tm-footer-menu__list-item"><a href="https://habr.com/kek/v1/auth/habrahabr/?back=/ru/company/ruvds/blog/500290/&amp;hl=ru" rel="nofollow" target="_self">
+                Войти
+              </a></li><li class="tm-footer-menu__list-item"><a href="https://habr.com/kek/v1/auth/habrahabr-register/?back=/ru/company/ruvds/blog/500290/&amp;hl=ru" rel="nofollow" target="_self">
+                Регистрация
+              </a></li></ul></div></div><div class="tm-footer-menu__block"><h3 class="tm-footer-menu__block-title">
+          Разделы
+        </h3> <div class="tm-footer-menu__block-content"><ul class="tm-footer-menu__list"><li class="tm-footer-menu__list-item"><a href="https://habr.com/ru/" class="footer-menu__item-link router-link-active">
+                Публикации
+              </a></li><li class="tm-footer-menu__list-item"><a href="https://habr.com/ru/news/" class="footer-menu__item-link">
+                Новости
+              </a></li><li class="tm-footer-menu__list-item"><a href="https://habr.com/ru/hubs/" class="footer-menu__item-link">
+                Хабы
+              </a></li><li class="tm-footer-menu__list-item"><a href="https://habr.com/ru/companies/" class="footer-menu__item-link">
+                Компании
+              </a></li><li class="tm-footer-menu__list-item"><a href="https://habr.com/ru/users/" class="footer-menu__item-link">
+                Авторы
+              </a></li><li class="tm-footer-menu__list-item"><a href="https://habr.com/ru/sandbox/" class="footer-menu__item-link">
+                Песочница
+              </a></li></ul></div></div><div class="tm-footer-menu__block"><h3 class="tm-footer-menu__block-title">
+          Информация
+        </h3> <div class="tm-footer-menu__block-content"><ul class="tm-footer-menu__list"><li class="tm-footer-menu__list-item"><a href="https://habr.com/ru/docs/help/" class="footer-menu__item-link">
+                Устройство сайта
+              </a></li><li class="tm-footer-menu__list-item"><a href="https://habr.com/ru/docs/authors/codex/" class="footer-menu__item-link">
+                Для авторов
+              </a></li><li class="tm-footer-menu__list-item"><a href="https://habr.com/ru/docs/companies/corpblogs/" class="footer-menu__item-link">
+                Для компаний
+              </a></li><li class="tm-footer-menu__list-item"><a href="https://habr.com/ru/docs/docs/transparency/" class="footer-menu__item-link">
+                Документы
+              </a></li><li class="tm-footer-menu__list-item"><a href="https://account.habr.com/info/agreement" target="_blank">
+                Соглашение
+              </a></li><li class="tm-footer-menu__list-item"><a href="https://account.habr.com/info/confidential/" target="_blank">
+                Конфиденциальность
+              </a></li></ul></div></div><div class="tm-footer-menu__block"><h3 class="tm-footer-menu__block-title">
+          Услуги
+        </h3> <div class="tm-footer-menu__block-content"><ul class="tm-footer-menu__list"><li class="tm-footer-menu__list-item"><a href="https://docs.google.com/presentation/d/e/2PACX-1vQLwRfQmXibiUlWaRg-BAc38s7oM3lJiaPju7qmdJsp8ysIvZ_G-Npem0njJLMozE2bPHMpDqiI5hhy/pub?start=false&amp;loop=false&amp;delayms=60000&amp;slide=id.g91a03369cd_4_297" target="_blank">
+                Реклама
+              </a></li><li class="tm-footer-menu__list-item"><a href="https://habrastorage.org/storage/stuff/habr/service_price.pdf" target="_blank">
+                Тарифы
+              </a></li><li class="tm-footer-menu__list-item"><a href="https://docs.google.com/presentation/d/e/2PACX-1vQJJds8-Di7BQSP_guHxICN7woVYoN5NP_22ra-BIo4bqnTT9FR6fB-Ku2P0AoRpX0Ds-LRkDeAoD8F/pub?start=false&amp;loop=false&amp;delayms=60000" target="_blank">
+                Контент
+              </a></li><li class="tm-footer-menu__list-item"><a href="https://tmtm.timepad.ru/" target="_blank">
+                Семинары
+              </a></li><li class="tm-footer-menu__list-item"><a href="https://habr.com/ru/megaprojects/" class="footer-menu__item-link">
+                Мегапроекты
+              </a></li></ul></div></div></div></div></div> <div class="tm-footer"><div class="tm-page-width"><div class="tm-footer__container"><!----> <div class="tm-footer__social"><a href="https://www.facebook.com/habrahabr.ru" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon"><svg height="16" width="16" class="tm-svg-img tm-svg-icon"><title>Facebook</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-facebook"></use></svg></a><a href="https://twitter.com/habr_com" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon"><svg height="16" width="16" class="tm-svg-img tm-svg-icon"><title>Twitter</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-twitter"></use></svg></a><a href="https://vk.com/habr" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon"><svg height="16" width="16" class="tm-svg-img tm-svg-icon"><title>VK</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-vkontakte"></use></svg></a><a href="https://telegram.me/habr_com" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon"><svg height="16" width="16" class="tm-svg-img tm-svg-icon"><title>Telegram</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-telegram"></use></svg></a><a href="https://www.youtube.com/channel/UCd_sTwKqVrweTt4oAKY5y4w" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon"><svg height="16" width="16" class="tm-svg-img tm-svg-icon"><title>Youtube</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-youtube"></use></svg></a><a href="https://zen.yandex.ru/habr" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon"><svg height="16" width="16" class="tm-svg-img tm-svg-icon"><title>Яндекс Дзен</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-zen"></use></svg></a></div> <div class="v-portal" style="display:none;"></div> <button class="tm-footer__link"><!---->
+        Настройка языка
+      </button> <a href="https://habr.com/ru/about" class="tm-footer__link">
+        О сайте
+      </a> <a href="https://habr.com/ru/feedback/" class="tm-footer__link">
+        Техническая поддержка
+      </a> <!----> <a href="https://habr.com/berserk-mode-nope" class="tm-footer__link">
+        Вернуться на старую версию
+      </a> <div class="tm-footer-copyright"><span class="tm-copyright"><span class="tm-copyright__years">© 2006–2021 </span> <span class="tm-copyright__name">«<a href="https://company.habr.com/" rel="noopener" target="_blank" class="tm-copyright__link">Habr</a>»</span></span></div></div></div></div> <!----> <!----></div> <div class="vue-portal-target"><!----></div></div>
+
+<script src="./Выделение и CSS _ Хабр_files/chunk-vendors.3520ba24.js.Без названия" defer=""></script><script src="./Выделение и CSS _ Хабр_files/app.dfde8f63.js.Без названия" defer=""></script>
+
+
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    </script>
+  
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+    ym(24049213, "init", {
+      defer:true,
+      trackLinks:true,
+      accurateTrackBounce:true,
+      webvisor:false,
+    });
+  </script>
+  <noscript>
+    <div>
+      <img src="https://mc.yandex.ru/watch/24049213" style="position:absolute; left:-9999px;" alt="" />
+    </div>
+  </noscript>
+  
+    <script type="text/javascript">
+      window.addEventListener('load', function () {
+        setTimeout(() => {
+          const img = new Image();
+          img.src = 'https://vk.com/rtrg?p=VK-RTRG-421343-57vKE';
+        }, 0);
+      });
+    </script>
+  
+<script src="./Выделение и CSS _ Хабр_files/ads.js.Без названия" onload="window[&#39;zhY4i4nJ9K&#39;] = true"></script>
+
+
+<div><div><div class="Vue-Toastification__container top-left"></div></div><div><div class="Vue-Toastification__container top-center"></div></div><div><div class="Vue-Toastification__container top-right"></div></div><div><div class="Vue-Toastification__container bottom-left"></div></div><div><div class="Vue-Toastification__container bottom-center"></div></div><div><div class="Vue-Toastification__container bottom-right"></div></div></div><div id="K9Jn4i4Yhz" style="display: none;"></div></body></html>
